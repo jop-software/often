@@ -26,7 +26,8 @@ class BaseController extends Prefab
      * Render a template
      */
     public function render(string $templateName) {
-        return Template::instance()->render($templateName);
+        $this->f3->set("UI.template", $templateName);
+        return Template::instance()->render("base.html.php");
     }
 
 }

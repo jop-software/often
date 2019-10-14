@@ -4,6 +4,6 @@
         <title>often v0.0.1 by Johannes Przymusinski</title>
     </head>
     <body>
-        <include href="{{ template_name }}" />
+        <include href="{{ UI.template }}" />
     </body>
 </html>
