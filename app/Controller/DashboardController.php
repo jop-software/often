@@ -2,7 +2,7 @@
 
 namespace App\Controller;
 
-class DashboardController 
+class DashboardController extends BaseController
 {
 
     public function indexAction() {
