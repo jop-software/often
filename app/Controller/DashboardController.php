@@ -6,7 +6,7 @@ class DashboardController extends BaseController
 {
 
     public function indexAction() {
-        echo "Dashboard";
+        echo $this->render("dashboard/index.html.php");
     }
 
 }
