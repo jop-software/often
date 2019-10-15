@@ -1,6 +1,6 @@
 RewriteEngine On
 
-RewriteRule ^(tmp)\/|\.ini$ - [R=404]
+RewriteRule ^(tmp|db)\/|\.ini$ - [R=404]
 
 RewriteCond %{REQUEST_FILENAME} !-l
 RewriteCond %{REQUEST_FILENAME} !-f
