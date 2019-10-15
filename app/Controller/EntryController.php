@@ -11,15 +11,18 @@ class EntryController extends BaseController {
     }
 
     public function editAction(Base $f3, array $params) {
-        echo "edit entry";
+        $id = $params['id'];
+        echo "edit entry $id";
     }
 
     public function deleteAction(Base $f3, array $params) {
-        echo "delete entry";
+        $id = $params['id'];
+        echo "delete entry $id";
     }
 
     public function showAction(Base $f3, array $params) {
-        echo "show entry";
+        $id = $params['id'];
+        echo "show entry $id";
     }
 
 }
