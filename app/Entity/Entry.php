@@ -90,7 +90,7 @@ class Entry {
 
             $work = $start->diff($end)->format("%H:%I:%S");
             $work = new DateTime($work);
-            
+
             //for what ever reason we need to add the break to the work
             $work->add($break->diff(new DateTime("00:00:00")));
 
