@@ -14,6 +14,10 @@
         <input type="time" name="end" id="end">
     </div>
     <div class="form-group">
+        <label for="break">Break:</label>
+        <input type="time" name="break" id="break">
+    </div>
+    <div class="form-group">
         <label for="exp">Expectation:</label>
         <input type="time" name="exp" id="exp">
     </div>
