@@ -38,6 +38,12 @@ class BaseModel extends Prefab {
         );
     }
 
+    /**
+     * get a new \DB\SQL\Mapper instance with the given tablename
+     * 
+     * @param string $tablename
+     * @return \DB\SQL\Mapper
+     */
     public function getMapper(string $tableName) {
         $mapper = new Mapper($this->sql, $tableName);
         return $mapper;
