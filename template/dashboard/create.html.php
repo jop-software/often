@@ -1,6 +1,6 @@
 <h1>Create Entry</h1>
 
-<form action="{{ @APP.base }}/createEntry" method="POST">
+<form action="{{ @app.base }}/createEntry" method="POST">
     <div class="form-group">
         <label for="date">Date:</label>
         <input type="date" name="date" id="date">
