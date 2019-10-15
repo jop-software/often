@@ -1,6 +1,6 @@
 use often;
 
--- table holding all entries
+-- table holding all entries˚
 create table entry (
     ID int auto_increment,
     date date,
