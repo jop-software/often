@@ -1,6 +1,8 @@
 <?php
 
 use Doctrine\DBAL\DriverManager;
+use Doctrine\DBAL\Tools\Console\Helper\ConnectionHelper;
+use Symfony\Component\Console\Helper\HelperSet;
 
 require_once "vendor/autoload.php";
 
@@ -14,4 +16,8 @@ $connection = DriverManager::getConnection([
     "password" => $f3->get("DB.PASSWORD"),
     "dbname" => $f3->get("DB.NAME"),
     "driver" => $f3->get("DB.DRIVER"),
+]);
+
+return new HelperSet([
+    "db" => new ConnectionHelper($connection)
 ]);
