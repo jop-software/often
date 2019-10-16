@@ -87,25 +87,28 @@ class EntryModel extends BaseModel {
      * @return array[Entry]
      */
     public function loadAll() {
-        $mapper = $this->getMapper("entry");
+        $queryBuilder = $this->getQueryBuilder()
+            ->select("*")
+            ->from("entry");
 
-        $entries = [];
+        $result = $queryBuilder->execute();
 
-        foreach ($mapper->find() as $dbEntry) {
-            $entry = new Entry();
+        if ($result->rowCount() >= 1) {
+            // get the data form the result
+            $result = $result->fetchAll();
 
-            $entry->setId($dbEntry->ID);
-            $entry->setDate($dbEntry->date);
-            $entry->setStart($dbEntry->start);
-            $entry->setEnd($dbEntry->end);
-            $entry->setBreak($dbEntry->break);
-            $entry->setExp($dbEntry->exp);
-            $entry->setNote($dbEntry->note);
+            // create and return an new entry instance with the result
+            $entries =  $this->createEntryFromResult($result);
 
-            array_push($entries, $entry);
+            // make sure to return an array
+            if (!is_array($entries)) {
+                return [$entries];
+            } else {
+                return $entries;
+            }
         }
-
-        return $entries;
+        
+    
     }
 
     /**
