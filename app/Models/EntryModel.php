@@ -11,16 +11,26 @@ class EntryModel extends BaseModel {
      * does create a new dataset in the database => do not use for updating!
      */
     public function save(Entry $entry) {
-        $mapper = $this->getMapper("entry");
+        // Construct the queryBuilder
+        $queryBuilder = $this->getQueryBuilder()
+            ->insert("entry")
+            ->values([
+                "date" => "?",
+                "start" => "?",
+                "end" => "?",
+                "break" => "?",
+                "exp" => "?",
+                "note" => "?",
+            ])
+            ->setParameter(0, $entry->getDate())
+            ->setParameter(1, $entry->getStart())
+            ->setParameter(2, $entry->getEnd())
+            ->setParameter(3, $entry->getBreak())
+            ->setParameter(4, $entry->getExp())
+            ->setParameter(5, $entry->getNote());
 
-        $mapper->date = $entry->getDate();
-        $mapper->start = $entry->getStart();
-        $mapper->end = $entry->getEnd();
-        $mapper->exp = $entry->getExp();
-        $mapper->break = $entry->getBreak();
-        $mapper->note = $entry->getNote();
-
-        $mapper->save();
+        // Execute the query
+        $queryBuilder->execute();
     }
 
     /**
