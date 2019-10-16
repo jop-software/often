@@ -40,21 +40,23 @@ class EntryModel extends BaseModel {
      * @return App\Entity\Entry
      */
     public function loadById(int $id) {
-        $mapper = $this->getMapper("entry");
 
-        $mapper->load(["ID = ?", $id]);
+        $queryBuilder = $this->getQueryBuilder()
+            ->select("*")
+            ->from("entry")
+            ->where("ID = ?")
+            ->setParameter(0, $id);
 
-        $entry = new Entry();
+        $result = $queryBuilder->execute();
 
-        $entry->setId($mapper->ID);
-        $entry->setDate($mapper->date);
-        $entry->setStart($mapper->start);
-        $entry->setEnd($mapper->end);
-        $entry->setBreak($mapper->break);
-        $entry->setExp($mapper->exp);
-        $entry->setNote($mapper->note);
+        if ($result->rowCount() >= 1) {
 
-        return $entry;
+            // get the data form the result
+            $result = $result->fetchAll();
+            
+            // create and return an new entry instance with the result
+            return $this->createEntryFromResult($result);
+        }
     }
 
     /**
@@ -115,6 +117,53 @@ class EntryModel extends BaseModel {
         $mapper->load(["ID = ?", $id]);
 
         $mapper->erase();
+    }
+
+    /**
+     * creates a App\Entity\Entry instance with the data from the given result
+     * returns an array of instances if $result has two dimension
+     * 
+     * @param array $result
+     * @return \App\Entity\Entry | \App\Entity\Entry[]
+     */
+    private function createEntryFromResult(array $result) {
+        // check if the first element in the given array is an array
+        // => if so, we have to return an array of instances
+        // => if not, we can create a single instace from the array
+        if (count($result) === 1) {
+            // we have to construct only one array
+            return $this->createSingleInstance($result[0]);
+        } else {
+            // create empty array to later store created instances
+            $entires = [];
+            // Iteate over all given entry data
+            foreach ($result as $entryData) {
+                // create a new entry instance and push to array
+                array_push($entires, $this->createSingleInstance($entryData));
+            }
+
+            return $entires;
+        }
+    }
+
+    /**
+     * Create a single instance from the given data
+     * only for use inside createEntryFromResult function
+     * 
+     * @param array $data
+     * @return \App\Entity\Entry
+     */
+    private function createSingleInstance(array $data) {
+        $entry = new Entry();
+        $entry->setId($data["ID"]);
+        $entry->setDate($data["date"]);
+        $entry->setStart($data["start"]);
+        $entry->setEnd($data["end"]);
+        $entry->setBreak($data["break"]);
+        $entry->setExp($data["exp"]);
+        $entry->setNote($data["note"]);
+
+        return $entry;
     }
 
 }
