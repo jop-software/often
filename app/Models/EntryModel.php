@@ -28,7 +28,25 @@ class EntryModel extends BaseModel {
     }
 
     public function loadAll() {
+        $mapper = $this->getMapper("entry");
 
+        $entries = [];
+
+        foreach ($mapper->find() as $dbEntry) {
+            $entry = new Entry();
+
+            $entry->setId($dbEntry->ID);
+            $entry->setDate($dbEntry->date);
+            $entry->setStart($dbEntry->start);
+            $entry->setEnd($dbEntry->end);
+            $entry->setBreak($dbEntry->break);
+            $entry->setExp($dbEntry->exp);
+            $entry->setNote($dbEntry->note);
+
+            array_push($entries, $entry);
+        }
+
+        return $entries;
     }
 
 }
