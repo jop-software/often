@@ -54,6 +54,17 @@ class EntryController extends BaseController {
         ]);
     }
 
+    /**
+     * API Route handler for deleting an entry
+     */
+    public function delete() {
+        $id = $this->f3->get("POST.id");
+
+        (new EntryModel())->deleteById($id);
+
+        $this->f3->reroute("/dashboard");
+    }
+
     public function showAction(Base $f3, array $params) {
         $id = $params["id"];
         $entry = (new EntryModel())->loadById($id);

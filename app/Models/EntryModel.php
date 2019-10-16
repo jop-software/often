@@ -63,4 +63,15 @@ class EntryModel extends BaseModel {
         return $entries;
     }
 
+    /**
+     * delete the entry with the given id from the database
+     */
+    public function deleteById(int $id) {
+        $mapper = $this->getMapper("entry");
+
+        $mapper->load(["ID = ?", $id]);
+
+        $mapper->erase();
+    }
+
 }
