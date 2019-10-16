@@ -37,8 +37,26 @@ class EntryModel extends BaseModel {
         return $entry;
     }
 
-    public function updateById(int $id) {
+    /**
+     * Update an given Entry in the database
+     * uses the ID of the given entry to load the database object, so updating the ID of an Entry is possible
+     * 
+     * @param Entry $entry
+     * @return bool
+     */
+    public function updateById(Entry $entry) {
+        $mapper = $this->getMapper("entry");
 
+        $mapper->load(["ID = ?", $entry->getId()]);
+
+        $mapper->date = $entry->getDate();
+        $mapper->start = $entry->getStart();
+        $mapper->end = $entry->getEnd();
+        $mapper->break = $entry->getBreak();
+        $mapper->exp = $entry->getExp();
+        $mapper->note = $entry->getNote();
+
+        return $mapper->update();
     }
 
     public function loadAll() {
