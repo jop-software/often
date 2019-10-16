@@ -6,6 +6,9 @@ use Base;
 use Prefab;
 use DB\SQL;
 use DB\SQL\Mapper;
+use Doctrine\DBAL\DriverManager;
+use Doctrine\DBAL\Connection;
+use Doctrine\DBAL\Query\QueryBuilder;
 
 class BaseModel extends Prefab {
 
@@ -18,6 +21,11 @@ class BaseModel extends Prefab {
      * @var \DB\SQL
      */
     protected $sql;
+
+    /**
+     * @var \Doctrine\DBAL\Connection
+     */
+    protected $connection;
 
     public function __construct()
     {
@@ -36,6 +44,15 @@ class BaseModel extends Prefab {
             "mysql:host=$host;dbname=$name;port=$port",
             $user, $pass
         );
+
+        // Initiate doctrine connection
+        $this->connection = DriverManager::getConnection([
+            "host" => $this->f3->get("DB.HOSTNAME"),
+            "user" => $this->f3->get("DB.USERNAME"),
+            "password" => $this->f3->get("DB.PASSWORD"),
+            "dbname" => $this->f3->get("DB.NAME"),
+            "driver" => $this->f3->get("DB.DRIVER"),
+        ]);
     }
 
     /**
@@ -47,6 +64,15 @@ class BaseModel extends Prefab {
     public function getMapper(string $tableName) {
         $mapper = new Mapper($this->sql, $tableName);
         return $mapper;
+    }
+
+    /**
+     * return fresh instance of the doctrine query builder
+     * 
+     * @return \Doctrine\DBAL\Query\QueryBuilder
+     */
+    public function getQueryBuilder() {
+        return $this->connection->createQueryBuilder();
     }
 
 }
