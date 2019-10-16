@@ -26,7 +26,7 @@ class Entry {
     }
 
     public function setDate($date) {
-        $this->date = new DateTime($date);
+        $this->date = $date;
     }
 
     public function setStart($start) {
