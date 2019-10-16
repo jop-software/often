@@ -6,6 +6,10 @@ use App\Entity\Entry;
 
 class EntryModel extends BaseModel {
 
+    /**
+     * Save the given Entry to the database
+     * does create a new dataset in the database => do not use for updating!
+     */
     public function save(Entry $entry) {
         $mapper = $this->getMapper("entry");
 
@@ -19,6 +23,12 @@ class EntryModel extends BaseModel {
         $mapper->save();
     }
 
+    /**
+     * Loads an Entry by the given ID from the database
+     * 
+     * @param int $id
+     * @return App\Entity\Entry
+     */
     public function loadById(int $id) {
         $mapper = $this->getMapper("entry");
 
@@ -59,6 +69,11 @@ class EntryModel extends BaseModel {
         return $mapper->update();
     }
 
+    /**
+     * Load all Entries from the database 
+     * 
+     * @return array[Entry]
+     */
     public function loadAll() {
         $mapper = $this->getMapper("entry");
 
