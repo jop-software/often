@@ -5,5 +5,5 @@ return [
     "migrations_namespace" => "App\Migrations",
     "table_name" => "doctrine_migrations",
     "column_name" => "version",
-    "migrations_directory" => "App/Migrations",
+    "migrations_directory" => "App/Migrations/",
 ];
