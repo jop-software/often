@@ -121,12 +121,6 @@ class EntryModel extends BaseModel {
             ->setParameter(0, $id);
 
         $queryBuilder->execute();
-
-        // $mapper = $this->getMapper("entry");
-
-        // $mapper->load(["ID = ?", $id]);
-
-        // $mapper->erase();
     }
 
     /**
