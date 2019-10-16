@@ -32,19 +32,6 @@ class BaseModel extends Prefab {
         // Load FatFree instance
         $this->f3 = Base::instance();
 
-        // Load credentials form database
-        $host = $this->f3->get("DB.HOSTNAME");
-        $port = $this->f3->get("DB.PORT");
-        $name = $this->f3->get("DB.NAME");
-        $user = $this->f3->get("DB.USERNAME");
-        $pass = $this->f3->get("DB.PASSWORD");
-
-        // Initiate the SQL connection
-        $this->sql = new SQL(
-            "mysql:host=$host;dbname=$name;port=$port",
-            $user, $pass
-        );
-
         // Initiate doctrine connection
         $this->connection = DriverManager::getConnection([
             "host" => $this->f3->get("DB.HOSTNAME"),
