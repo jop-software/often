@@ -22,7 +22,7 @@ final class Version20191016143524 extends AbstractMigration
         $table = $schema->createTable("entry");
 
         // Set AI ID column
-        $table->addColumn("ID", "integer", ["auto_increment" => true]);
+        $table->addColumn("ID", "integer", ["autoincrement" => true]);
 
         $table->addColumn("date", "date", ["notnull" => false]);
         $table->addColumn("start", "time", ["notnull" => false]);
