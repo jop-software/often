@@ -44,7 +44,7 @@ class EntryModel extends BaseModel {
      * @param Entry $entry
      * @return bool
      */
-    public function updateById(Entry $entry) {
+    public function update(Entry $entry) {
         $mapper = $this->getMapper("entry");
 
         $mapper->load(["ID = ?", $entry->getId()]);

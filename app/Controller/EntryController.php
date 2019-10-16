@@ -42,7 +42,29 @@ class EntryController extends BaseController {
 
     public function editAction(Base $f3, array $params) {
         $id = $params['id'];
-        echo "edit entry $id";
+        $entry = (new EntryModel())->loadById($id);
+
+        echo $this->render("entry/edit.html.php", [
+            "entry" => $entry,
+        ]); 
+    }
+
+    /**
+     * API Handler for editing an entry in the databse POST /editEntry
+     */
+    public function edit() {
+        $entry = new Entry();
+        $entry->setId($this->f3->get("POST.id"));
+        $entry->setDate($this->f3->get("POST.date"));
+        $entry->setStart($this->f3->get("POST.start"));
+        $entry->setEnd($this->f3->get("POST.end"));
+        $entry->setBreak($this->f3->get("POST.break"));
+        $entry->setExp($this->f3->get("POST.exp"));
+        $entry->setNote($this->f3->get("POST.note"));
+
+        (new EntryModel())->update($entry);
+
+        $this->f3->reroute("/dashboard");
     }
 
     public function deleteAction(Base $f3, array $params) {
