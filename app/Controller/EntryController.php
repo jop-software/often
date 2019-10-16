@@ -3,6 +3,7 @@
 namespace App\Controller;
 
 use App\Entity\Entry;
+use App\Models\EntryModel;
 use Base;
 
 class EntryController extends BaseController {
@@ -32,6 +33,8 @@ class EntryController extends BaseController {
 
         // save entry to database
 
+        $entryModel = new EntryModel();
+        $entryModel->save($entry);
         
         // reroute to dashboard
         $this->f3->reroute("/dashboard");
