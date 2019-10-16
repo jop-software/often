@@ -20,7 +20,21 @@ class EntryModel extends BaseModel {
     }
 
     public function loadById(int $id) {
+        $mapper = $this->getMapper("entry");
 
+        $mapper->load(["ID = ?", $id]);
+
+        $entry = new Entry();
+
+        $entry->setId($mapper->ID);
+        $entry->setDate($mapper->date);
+        $entry->setStart($mapper->start);
+        $entry->setEnd($mapper->end);
+        $entry->setBreak($mapper->break);
+        $entry->setExp($mapper->exp);
+        $entry->setNote($mapper->note);
+
+        return $entry;
     }
 
     public function updateById(int $id) {
