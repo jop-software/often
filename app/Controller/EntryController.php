@@ -51,7 +51,8 @@ class EntryController extends BaseController {
     }
 
     public function showAction(Base $f3, array $params) {
-        $entry = (new EntryModel())->loadById($params["id"]);
+        $id = $params["id"];
+        $entry = (new EntryModel())->loadById($id);
         
         echo $this->render("entry/show.html.php", [
             "entry" => $entry
