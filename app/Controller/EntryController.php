@@ -47,7 +47,11 @@ class EntryController extends BaseController {
 
     public function deleteAction(Base $f3, array $params) {
         $id = $params['id'];
-        echo "delete entry $id";
+        $entry = (new EntryModel())->loadById($id);
+
+        echo $this->render("entry/delete.html.php", [
+            "entry" => $entry,
+        ]);
     }
 
     public function showAction(Base $f3, array $params) {
@@ -55,7 +59,7 @@ class EntryController extends BaseController {
         $entry = (new EntryModel())->loadById($id);
         
         echo $this->render("entry/show.html.php", [
-            "entry" => $entry
+            "entry" => $entry,
         ]);
     }
 
