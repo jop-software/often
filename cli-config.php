@@ -10,6 +10,7 @@ require_once "vendor/autoload.php";
 $f3 = Base::instance();
 $f3->config("config.ini");
 
+// Initiate connection
 $connection = DriverManager::getConnection([
     "host" => $f3->get("DB.HOSTNAME"),
     "user" => $f3->get("DB.USERNAME"),
@@ -18,6 +19,7 @@ $connection = DriverManager::getConnection([
     "driver" => $f3->get("DB.DRIVER"),
 ]);
 
+// return HelperSet with Connection
 return new HelperSet([
     "db" => new ConnectionHelper($connection)
 ]);
