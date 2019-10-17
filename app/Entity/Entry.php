@@ -100,4 +100,24 @@ class Entry {
         return $this->workedTime;
     }
 
+    /**
+     * calculate the work difference 
+     * todo: does not calculate negative values
+     */
+    public function getWorktimeDifference() {
+        // Get work time in millis
+        $workedTime = new DateTime($this->getWorkedTime());
+        $workedTime = $workedTime->getTimestamp();
+
+        // Get exp work time in millis
+        $exp = new DateTime($this->getExp());
+        $exp = $exp->getTimestamp();
+
+        // substract actual worked time from extected tme
+        $diff = $exp - $workedTime;
+
+        $overtime = (new DateTime())->setTimestamp($diff);
+        return $overtime->format("H:I:s");
+    }
+
 }
