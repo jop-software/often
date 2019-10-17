@@ -4,12 +4,18 @@ namespace App\Entity;
 
 use DateInterval;
 use DateTime;
+use App\Entity\Time;
 
 class Entry {
 
     /// Variables, stored in database
     private $id;
+
+    /**
+     * @var \App\Entity\Time
+     */
     private $date;
+
     private $start;
     private $end;
     private $break;
@@ -25,6 +31,9 @@ class Entry {
         $this->id = $id;
     }
 
+    /**
+     * set the date of the entry
+     */
     public function setDate($date) {
         $this->date = $date;
     }
