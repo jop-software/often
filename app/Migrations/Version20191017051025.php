@@ -21,7 +21,7 @@ final class Version20191017051025 extends AbstractMigration
     {
         $table = $schema->getTable("entry");
 
-        $table->addColumn("userid", "integer");
+        $table->addColumn("userid", "integer", ["notnull" => false]);
 
         $table->addForeignKeyConstraint("user", ["userid"], ["ID"], [], "entry_userid");
 
