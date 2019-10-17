@@ -15,6 +15,10 @@
             <td>{{ @entry->getEnd() }}</td>
         </tr>
         <tr>
+            <td>Diff</td>
+            <td>{{ @entry->getWorktimeDifference() }}</td>
+        </tr>
+        <tr>
             <td>Break</td>
             <td>{{ @entry->getBreak() }}</td>
         </tr>
