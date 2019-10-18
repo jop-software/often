@@ -43,7 +43,7 @@ class User {
      * @return bool
      */
     public function setPassword(string $password, bool $encrypt = true) {
-        if (count($password) >= 8) {
+        if (strlen($password) >= 8) {
             $this->password = sha1($password);
             return true;
         } else return false;
