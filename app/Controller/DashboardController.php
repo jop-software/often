@@ -10,8 +10,33 @@ class DashboardController extends BaseController
     public function indexAction() {
         $entries = (new EntryModel())->loadAll();
 
+        // add all total diff seconds from all loaded entries
+        $totalSeconds = 0;
+        if (isset($entries)) {
+            foreach ($entries as $entry) {
+                $totalSeconds += $entry->getWorktimeDifference()[2];
+            } 
+        }
+
+        // convert seconds to hours and minutes
+        $minutes = ($totalSeconds / (60)) % 60;
+        $hours = ($totalSeconds / (60 * 60)) % 24;
+
+        // format hours and minutes
+        $hours = $hours <= 9 
+            ? $hours < 0 
+                ? str_split($hours)[0] . "0" . str_split($hours)[1] 
+                : "0$hours" 
+            : $hours;
+
+        $minutes = $minutes <= 9 
+            ? "0$minutes" 
+            : $minutes;
+
         echo $this->render("dashboard/index.html.php", [
-            "entries" => $entries
+            "entries" => $entries,
+            "totalSeconds" => $totalSeconds,
+            "totalTime" => "$hours:$minutes"
         ]);
     }
 
