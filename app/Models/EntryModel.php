@@ -84,7 +84,7 @@ class EntryModel extends BaseModel {
     /**
      * Load all Entries from the database 
      * 
-     * @return array[Entry]
+     * @return Entry[]
      */
     public function loadAll() {
         $queryBuilder = $this->getQueryBuilder()
