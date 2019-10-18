@@ -17,8 +17,10 @@ class User {
 
     /**
      * set the username of the user
+     * returns false if the given username does already exist in database
      * 
      * @param string $username
+     * @return bool
      */
     public function setUsername(string $username) {
         $this->username = $username;
@@ -27,18 +29,19 @@ class User {
     /**
      * set the password of the user
      * set $encrypt to false if you already have the hashed password
+     * returns false if the given password is invalid
      * 
      * @param string $password
      * @param bool $encrypt = true
+     * @return bool
      */
     public function setPassword(string $password, bool $encrypt = true) {
-        if ($encrypt) {
+        if (count($password) >= 8) {
             $this->password = sha1($password);
-        } else {
-            $this->password = $password;
-        }
+            return true;
+        } else return false;
     }
-    
+
     /**
      * get the id from the user
      */
