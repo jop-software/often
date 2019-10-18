@@ -58,7 +58,16 @@ class BaseController extends Prefab
         }
 
         $this->f3->set("GUI.template", $templateName);
-        return Template::instance()->render("base.html.php");
+        $template = Template::instance()->render("base.html.php");
+        
+        // we have to clear the errors after the render, but before the end
+        // of this function
+
+        // check if the $clearErrors flag is set
+        // if so, call the clearErrors function
+        if ($clearErrors) $this->clearErrors();
+        
+        return $template;
     }
 
 }
