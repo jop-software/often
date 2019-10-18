@@ -8,7 +8,7 @@
 
 <h1>Register</h1>
 
-<form action="register" method="POST">
+<form action="{{ @app.base }}/register" method="POST">
     <div class="form-group">
         <label for="username">Benutzername</label>
         <input type="text" name="username" id="username">
