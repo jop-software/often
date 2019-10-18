@@ -21,4 +21,20 @@ class UserModel extends BaseModel {
         return $result->rowCount() > 0;
     }
 
+    /**
+     * create a new user in the database
+     */
+    public function createNewUser(User $user) {
+        $queryBuilder = $this->getQueryBuilder()
+            ->insert("user")
+            ->values([
+                "username" => "?",
+                "password" => "?",
+            ])
+            ->setParameter(0, $user->getUsername())
+            ->setParameter(1, $user->getPassword());
+
+        $queryBuilder->execute();
+    }
+
 }
