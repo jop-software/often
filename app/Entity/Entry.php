@@ -97,13 +97,13 @@ class Entry {
             $end = new DateTime($this->end);
             $break = new DateTime($this->break);
 
-            $work = $start->diff($end)->format("%H:%I:%S");
+            $work = $start->diff($end)->format("%H:%i:%S");
             $work = new DateTime($work);
 
             //for what ever reason we need to add the break to the work
             $work->add($break->diff(new DateTime("00:00:00")));
 
-            $this->workedTime = $work->format("H:I:s");
+            $this->workedTime = $work->format("H:i:s");
         }
 
         return $this->workedTime;
