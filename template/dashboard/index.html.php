@@ -10,9 +10,9 @@
     </repeat>
 </ul>
 
-<a href="{{ @app.base }}/entry/create"><button>New</button></a>
 <check if="{{ @SESSION.userid }}">
     <true>
+        <a href="{{ @app.base }}/entry/create"><button>New</button></a>
         <a href="{{ @app.base }}/logout"><button>Logout</button></a>        
     </true>
     <false>
