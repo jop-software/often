@@ -1,4 +1,4 @@
-<h1>Edit {{ @entry->getDate() }}</h1>
+<h1> <a href="{{@app.base}}/dashboard"><-</a> Edit {{ @entry->getDate() }}</h1>
 
 <form action="{{ @app.base }}/editEntry" method="POST">
     <input type="hidden" name="id" value="{{ @entry->getId() }}">

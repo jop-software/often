@@ -1,4 +1,4 @@
-<h1>{{ @entry->getDate() }}</h1>
+<h1><a href="{{@app.base}}/dashboard"><-</a>  {{ @entry->getDate() }}</h1>
 
 <table>
     <tbody>

@@ -1,4 +1,4 @@
-<h1>Create Entry</h1>
+<h1><a href="{{@app.base}}/dashboard"><-</a>Create Entry</h1>
 
 <form action="{{ @app.base }}/createEntry" method="POST">
     <div class="form-group">
