@@ -112,6 +112,8 @@ class Entry {
     /**
      * calculate the work difference 
      * todo: does not calculate negative values
+     * 
+     * @return arary 
      */
     public function getWorktimeDifference() {
         // Get work time in millis
@@ -123,10 +125,27 @@ class Entry {
         $exp = $exp->getTimestamp();
 
         // substract actual worked time from extected tme
-        $diff = $exp - $workedTime;
+        // $diff are seconds
+        $diff = -($exp - $workedTime);
 
-        $overtime = (new DateTime())->setTimestamp($diff);
-        return $overtime->format("H:I:s");
+        // work out hours and minutes
+        $minutes = ($diff / (60)) % 60;
+        $hours = ($diff / (60 * 60)) % 24;
+
+        // return the hours (with sign), minutes an total seconds
+        // hours / minutes for rendering in views
+        // total seconds (with sign) for further calculation
+        return [
+            $hours <= 9 
+                ? $hours < 0 
+                    ? str_split($hours)[0] . "0" . str_split($hours)[1] 
+                    : "0$hours" 
+                : $hours,
+            $minutes <= 9 
+                ? "0$minutes" 
+                : $minutes,
+            $diff
+        ];
     }
 
 }

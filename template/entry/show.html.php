@@ -16,7 +16,10 @@
         </tr>
         <tr>
             <td>Diff</td>
-            <td>{{ @entry->getWorktimeDifference() }}</td>
+            <td>
+                {~ @diff = @entry->getWorktimeDifference() ~}
+                {{ @diff[0] }}:{{ @diff[1] }}
+            </td>
         </tr>
         <tr>
             <td>Break</td>
