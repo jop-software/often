@@ -9,7 +9,7 @@ use Base;
 class EntryController extends BaseController {
 
     public function createAction() {
-        echo $this->render("dashboard/create.html.php");
+        echo $this->render("entry/create.html.php");
     }
 
     public function create(Base $f3, array $params) {
