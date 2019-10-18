@@ -1,5 +1,3 @@
-<include href="utils/errors.html.php" />
-
 <style>
 .form-group {
     display: block;
