@@ -15,11 +15,6 @@ class BaseController extends Prefab
     protected $f3;
 
     /**
-     * @var string[]
-     */
-    protected $errors = [];
-
-    /**
      * BaseController constructor
      */
     public function __construct()
@@ -32,21 +27,24 @@ class BaseController extends Prefab
      * -> errors will get to the view
      */
     public function error(string $msg) {
-        array_push($this->errors, $msg);
+        $errors = $this->f3->get("SESSION.errors");
+        if (!$errors) $errors = [];
+        array_push($errors, $msg);
+        $this->f3->set("SESSION.errors", $errors);
     }
 
     /**
      * clear the error array
      */
     public function clearErrors() {
-        $this->errors = [];
+        $this->f3->set("SESSION.errors", []);
     }
 
     /**
      * return true if there are any errors
      */
     public function hasErrors() {
-        return (bool)count($this->errors) > 0;
+        return (bool)count($this->f3->get("SESSION.errors")) > 0;
     }
 
     /**
@@ -58,12 +56,6 @@ class BaseController extends Prefab
         foreach ($params as $key => $value) {
             $this->f3->set($key, $value);
         }
-
-        // pass the error array to the view
-        $this->f3->set("errors", $this->errors);
-
-        // clear the errors if the flag is set
-        if ($clearErrors) $this->clearErrors();
 
         $this->f3->set("GUI.template", $templateName);
         return Template::instance()->render("base.html.php");

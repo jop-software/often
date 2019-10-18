@@ -1,9 +1,9 @@
 <div id="errors">
-    <check if="{{ @errors }}">
+    <check if="{{ @SESSION.errors }}">
         <true>
             <b>Errors:</b>
             <ul>
-                <repeat group="{{ @errors }}" value="{{ @error }}">
+                <repeat group="{{ @SESSION.errors }}" value="{{ @error }}">
                     <li>
                         {{ @error }}
                     </li>
