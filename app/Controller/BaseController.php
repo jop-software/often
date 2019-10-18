@@ -17,7 +17,7 @@ class BaseController extends Prefab
     /**
      * @var string[]
      */
-    protected $errors;
+    protected $errors = [];
 
     /**
      * BaseController constructor
@@ -25,7 +25,6 @@ class BaseController extends Prefab
     public function __construct()
     {
         $this->f3 = Base::instance();
-        $this->errors = [];
     }
 
     /**
