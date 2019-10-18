@@ -2,6 +2,8 @@
 
 namespace App\Entity;
 
+use App\Models\UserModel;
+
 class User {
 
     private $id;
@@ -23,7 +25,12 @@ class User {
      * @return bool
      */
     public function setUsername(string $username) {
-        $this->username = $username;
+        $userModel = new UserModel();
+
+        if (!$userModel->doesUsernameExist($username)) {
+            $this->username = $username;
+            return true;
+        } else return false;
     }
 
     /**
