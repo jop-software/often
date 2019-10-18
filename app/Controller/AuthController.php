@@ -17,7 +17,7 @@ class AuthController extends BaseController {
 
         $user = new User();
         if (!$user->setUsername($username)) {
-            $this->error("Username already exists");
+            $this->error("Username <$username> already exists");
         }
 
         if (!$user->setPassword($password)) {
@@ -28,9 +28,10 @@ class AuthController extends BaseController {
         if (!$this->hasErrors()) {
             $userModel = new UserModel();
             $userModel->createNewUser($user);
+            $this->f3->reroute("/dashboard");
+        } else {
+            $this->f3->reroute("/register");
         }
-
-        $this->f3->reroute("/dashboard");
     }
 
     public function logoutUser() {
