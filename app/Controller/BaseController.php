@@ -44,6 +44,13 @@ class BaseController extends Prefab
     }
 
     /**
+     * return true if there are any errors
+     */
+    public function hasErrors() {
+        return (bool)count($this->errors) > 0;
+    }
+
+    /**
      * Render a template with given parameters
      */
     public function render(string $templateName, array $params = [], bool $clearErrors = true) {
