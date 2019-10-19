@@ -44,4 +44,36 @@ class UserModel extends BaseModel {
         $queryBuilder->execute();
     }
     
+    /**
+     * get the password from the user with the given id from the database
+     * 
+     * @param User $user
+     * @return string
+     */
+    private function getPasswordFromUser(User $user) {
+        $queryBuilder = $this->getQueryBuilder()
+            ->select("password")
+            ->from("user")
+            ->where("username = ?")
+            ->setParameter(0, $user->getUsername());
+        
+        $result = $queryBuilder->execute();
+
+        if ($result->rowCount() >= 1) {
+            return $result->fetchAll()[0]["password"];
+        } else return false;
+    }
+
+    /**
+     * check if the password from the given user matches the password
+     * stored in the database with the given username
+     * 
+     * @return bool
+     */
+    public function checkCredentials(User $user) {
+        $password = $this->getPasswordFromUser($user);
+
+        return $user->getPassword() === $password;
+    }
+
 }
