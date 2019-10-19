@@ -1,1 +1,2 @@
 *.php linguist-language=PHP
+*.html.php linguist-language=HTML
