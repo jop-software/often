@@ -2,6 +2,8 @@
 
 namespace App\Entity;
 
+use App\Models\UserModel;
+
 class User {
 
     private $id;
@@ -59,5 +61,31 @@ class User {
      */
     public function getPassword() {
         return $this->password;
+    }
+
+    /**
+     * tries to load the userid (not the password)
+     * 
+     * @return bool
+     */
+    public function tryConstruct() {
+        $userModel = new UserModel();
+        $user = new User();
+
+        $success = false;
+
+        if (!$this->getId() && $this->getUsername()) {
+            $user = $userModel->getUserFromUsername($this->getUsername());
+            $success = true;
+        } else if ($this->getId() && !$this->getUsername()) {
+            $user = $userModel->getUserFromId($this->getId());
+            $success = true;
+        }
+
+        if ($success) {
+            $this->username = $user->getUsername();
+            $this->id = $user->getId();
+            return true;
+        } else return false;
     }
 }

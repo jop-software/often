@@ -29,10 +29,10 @@ class UserController extends BaseController {
      * GET /logout
      * 
      * render form for the user to logout from their account
-     * todo: do we need this or should we just log the user out on GET /logout?
      */
     public function logoutAction() {
-        echo $this->render("user/logout.html.php");
+        // dont render any views, just call the AuthController and log the user out
+        AuthController::instance()->logoutUser();
     }
 
 }

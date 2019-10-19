@@ -76,4 +76,48 @@ class UserModel extends BaseModel {
         return $user->getPassword() === $password;
     }
 
+    /**
+     * returns the save user (without password) with the given username
+     */
+    public function getUserFromUsername(string $username) {
+        $queryBuilder = $this->getQueryBuilder()
+            ->select("id")
+            ->from("user")
+            ->where("username = ?")
+            ->setParameter(0, $username);
+
+        $result = $queryBuilder->execute();
+
+        if ($result->rowCount() >= 1) {
+            $result = $result->fetchAll();
+            $user = new User();
+            $user->setId($result[0]["id"]);
+            $user->setUsername($username);
+
+            return $user;
+        } else return false;
+        
+    }
+
+    /**
+     * returns the save user (without password) with the given id
+     */
+    public function getUserFromId(int $id) {
+        $queryBuilder = $this->getQueryBuilder()
+            ->select("username")
+            ->from("user")
+            ->where("id = ?")
+            ->setParameter(0, $id);
+
+        $result = $queryBuilder->execute();
+
+        if ($result->rowCount() >= 1) {
+            $user = new User();
+            $user->setId($id);
+            $user->setUsername($result->fetchAll()[0]["username"]);
+
+            return $user;
+        } else return false;
+    }
+
 }

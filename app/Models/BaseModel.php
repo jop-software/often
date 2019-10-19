@@ -40,10 +40,10 @@ class BaseModel extends Prefab {
         $pass = $this->f3->get("DB.PASSWORD");
 
         // Initiate the SQL connection
-        $this->sql = new SQL(
-            "mysql:host=$host;dbname=$name;port=$port",
-            $user, $pass
-        );
+        // $this->sql = new SQL(
+        //     "mysql:host=$host;dbname=$name;port=$port",
+        //     $user, $pass
+        // );
 
         // Initiate doctrine connection
         $this->connection = DriverManager::getConnection([

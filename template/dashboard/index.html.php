@@ -1,4 +1,4 @@
-<h1>Dashboard {{ @totalTime }}</h1>
+<h1>{{ @username }} Dashboard {{ @totalTime }}</h1>
 
 <ul>
     <repeat group="{{ @entries }}" value="{{ @entry }}">

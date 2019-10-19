@@ -2,6 +2,7 @@
 
 namespace App\Controller;
 
+use App\Entity\User;
 use App\Models\EntryModel;
 
 class DashboardController extends BaseController
@@ -33,7 +34,14 @@ class DashboardController extends BaseController
             ? "0$minutes" 
             : $minutes;
 
+        if ($this->f3->get("SESSION.userid")) {
+            $user = new User();
+            $user->setId($this->f3->get("SESSION.userid"));
+            $user->tryConstruct();
+        }
+
         echo $this->render("dashboard/index.html.php", [
+            "username" => isset($user) ? $user->getUsername() : "",
             "entries" => $entries,
             "totalSeconds" => $totalSeconds,
             "totalTime" => "$hours:$minutes"
