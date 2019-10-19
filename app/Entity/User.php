@@ -21,7 +21,6 @@ class User {
      * set the username of the user
      * 
      * @param string $username
-     * @return bool
      */
     public function setUsername(string $username) {
         $this->username = $username;
@@ -87,5 +86,15 @@ class User {
             $this->id = $user->getId();
             return true;
         } else return false;
+    }
+
+    /**
+     * check if the username exists in the database
+     * 
+     * @return bool
+     */
+    public function usernameExistsInDB() {
+        $model = new UserModel();
+        return $model->doesUsernameExist($this->username);
     }
 }
