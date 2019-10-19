@@ -69,4 +69,13 @@ class AuthController extends BaseController
         $this->f3->set("SESSION.userid", "");
         $this->f3->reroute("/dashboard");
     }
+
+    /**
+     * Override from BaseController
+     */
+    public function beforeRoute()
+    {
+        // do nothing
+        // => we want the dashboard route available for everyone
+    }
 }
