@@ -23,8 +23,15 @@ class UserModel extends BaseModel {
 
     /**
      * create a new user in the database
+     * returns false if the user already exists
+     * 
+     * @return bool
      */
     public function createNewUser(User $user) {
+        if ($this->doesUsernameExist($user->getUsername())) {
+            return false;
+        }
+
         $queryBuilder = $this->getQueryBuilder()
             ->insert("user")
             ->values([
@@ -36,5 +43,5 @@ class UserModel extends BaseModel {
 
         $queryBuilder->execute();
     }
-
+    
 }
