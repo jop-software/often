@@ -9,7 +9,12 @@ class DashboardController extends BaseController
 {
 
     public function indexAction() {
-        $entries = (new EntryModel())->loadAll();
+
+        // check if the user is logged and load only entry from the user
+        if ($userid = $this->f3->get("SESSION.userid")) {
+            $entries = (new EntryModel())->loadAllFromUser($userid);
+        } else $entries = [];
+
 
         // add all total diff seconds from all loaded entries
         $totalSeconds = 0;
@@ -46,6 +51,15 @@ class DashboardController extends BaseController
             "totalSeconds" => $totalSeconds,
             "totalTime" => "$hours:$minutes"
         ]);
+    }
+
+    /**
+     * Override from BaseController
+     */
+    public function beforeRoute()
+    {
+        // do nothing
+        // => we want the dashboard route available for everyone
     }
 
 }

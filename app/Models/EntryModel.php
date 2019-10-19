@@ -21,13 +21,15 @@ class EntryModel extends BaseModel {
                 "break" => "?",
                 "exp" => "?",
                 "note" => "?",
+                "userid" => "?",
             ])
             ->setParameter(0, $entry->getDate())
             ->setParameter(1, $entry->getStart())
             ->setParameter(2, $entry->getEnd())
             ->setParameter(3, $entry->getBreak())
             ->setParameter(4, $entry->getExp())
-            ->setParameter(5, $entry->getNote());
+            ->setParameter(5, $entry->getNote())
+            ->setParameter(6, $entry->getUserId());
 
         // Execute the query
         $queryBuilder->execute();
@@ -86,10 +88,12 @@ class EntryModel extends BaseModel {
      * 
      * @return Entry[]
      */
-    public function loadAll() {
+    public function loadAllFromUser(int $userid) {
         $queryBuilder = $this->getQueryBuilder()
             ->select("*")
-            ->from("entry");
+            ->from("entry")
+            ->where("userid = ?")
+            ->setParameter(0, $userid);
 
         $result = $queryBuilder->execute();
 

@@ -13,7 +13,6 @@ class EntryController extends BaseController {
     }
 
     public function create(Base $f3, array $params) {
-
         // Load values from form
         $date = $this->f3->get("POST.date");
         $start = $this->f3->get("POST.start");
@@ -30,6 +29,7 @@ class EntryController extends BaseController {
         $entry->setBreak($break);
         $entry->setExp($exp);
         $entry->setNote($note);
+        $entry->setUserId($this->f3->get("SESSION.userid"));
 
         // save entry to database
 

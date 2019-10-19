@@ -35,4 +35,13 @@ class UserController extends BaseController {
         AuthController::instance()->logoutUser();
     }
 
+        /**
+     * Override from BaseController
+     */
+    public function beforeRoute()
+    {
+        // do nothing
+        // => you can not be logged in if you want to login / register
+    }
+
 }
