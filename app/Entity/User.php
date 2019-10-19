@@ -35,14 +35,13 @@ class User {
 
     /**
      * set the password of the user
-     * set $encrypt to false if you already have the hashed password
      * returns false if the given password is invalid
      * 
      * @param string $password
      * @param bool $encrypt = true
      * @return bool
      */
-    public function setPassword(string $password, bool $encrypt = true) {
+    public function setPassword(string $password) {
         if (strlen($password) >= 8) {
             $this->password = sha1($password);
             return true;
@@ -69,5 +68,4 @@ class User {
     public function getPassword() {
         return $this->password;
     }
-
 }
