@@ -8,3 +8,7 @@ simple overtime tracking tool
 3. config database in config.ini
 4. "composer update" the repository
 5. migrate database with doctrine "vendor\bin\doctrine-migrations migrations:migrate"
+
+# Hosted
+I will host an version of often at often.jocode.org
+Sate: planned
