@@ -21,6 +21,7 @@ class Entry {
     private $break;
     private $exp;
     private $note;
+    private $userid;
 
     /// Cached Variables
     private $workedTime;
@@ -58,6 +59,10 @@ class Entry {
         $this->note = $note;
     }
 
+    public function setUserId($id) {
+        $this->userid = $id;
+    }
+
     public function getId() {
         return $this->id;
     }
@@ -84,6 +89,10 @@ class Entry {
 
     public function getNote() {
         return $this->note;
+    }
+
+    public function getUserId() {
+        return $this->userid;
     }
 
     // Getter for calculated values
