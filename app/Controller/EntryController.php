@@ -42,6 +42,10 @@ class EntryController extends BaseController {
 
     public function editAction(Base $f3, array $params) {
         $id = $params['id'];
+
+        // check if the user is the owner of this entry
+        $this->checkUser($this->f3->get("SESSION.userid"), $id);
+
         $entry = (new EntryModel())->loadById($id);
 
         echo $this->render("entry/edit.html.php", [
@@ -69,6 +73,10 @@ class EntryController extends BaseController {
 
     public function deleteAction(Base $f3, array $params) {
         $id = $params['id'];
+
+        // check if the user is the owner of this entry
+        $this->checkUser($this->f3->get("SESSION.userid"), $id);
+        
         $entry = (new EntryModel())->loadById($id);
 
         echo $this->render("entry/delete.html.php", [
@@ -89,11 +97,32 @@ class EntryController extends BaseController {
 
     public function showAction(Base $f3, array $params) {
         $id = $params["id"];
+
+        // check if the user is the owner of this entry
+        $this->checkUser($this->f3->get("SESSION.userid"), $id);
+
         $entry = (new EntryModel())->loadById($id);
         
         echo $this->render("entry/show.html.php", [
             "entry" => $entry,
         ]);
+    }
+
+    /**
+     * check if the user is allowd to use this route
+     * -> is the user the owner of the entry he wants to edit / show / delete?
+     */
+    private function checkUser(int $userid, int $entryid) {
+        // load the entry with the given id from the database
+        $entry = new Entry();
+        $entryModel = new EntryModel();
+        $entry = $entryModel->loadById($entryid);
+
+        // are the userid and the userid from the entry the same?
+        if ($entry->getUserId() != $userid) {
+            // reroute the user to the create entry form if he isnt allowd to use this entry
+            $this->f3->reroute("/entry/create");
+        } else return true;
     }
 
 }
