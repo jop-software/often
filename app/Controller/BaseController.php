@@ -74,6 +74,7 @@ class BaseController extends Prefab
      * check if the user is logged in before routing
      */
     public function beforeRoute() {
+        // check if the user is logged in
         if (!$this->f3->get("SESSION.userid")) {
             $this->f3->reroute("/dashboard");
         }
