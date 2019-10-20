@@ -4,18 +4,18 @@
 }    
 </style>
 
-<h1>Login</h1>
+<h1>{{ @language.login.title }}</h1>
 
 <form action="{{ @app.base }}/login" method="POST">
     <div class="form-group">
-        <label for="username">Benutzername</label>
+        <label for="username">{{ @language.login.form.username }}</label>
         <input type="text" name="username" id="username">
     </div>
     <div class="form-group">
-        <label for="password">Passwort</label>
+        <label for="password">{{ @language.login.form.password }}</label>
         <input type="password" name="password" id="password">
     </div>
     <div class="form-group">
-        <input type="submit" value="Login">
+        <input type="submit" value="{{ @language.login.form.submit }}">
     </div>
 </form>
