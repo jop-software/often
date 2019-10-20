@@ -9,6 +9,7 @@ class User {
     private $id;
     private $username;
     private $password;
+    private $language;
 
     /**
      * set the id of the user
@@ -42,6 +43,13 @@ class User {
     }
 
     /**
+     * set the language of the current user
+     */
+    public function setLanguage(string $language) {
+        $this->language = $language;
+    }
+
+    /**
      * get the id from the user
      */
     public function getId() {
@@ -60,6 +68,15 @@ class User {
      */
     public function getPassword() {
         return $this->password;
+    }
+
+    /**
+     * gets the language of the current user 
+     * 
+     * @return string
+     */
+    public function getLanguage() {
+        return $this->language;
     }
 
     /**
