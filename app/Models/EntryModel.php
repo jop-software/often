@@ -39,7 +39,7 @@ class EntryModel extends BaseModel {
      * Loads an Entry by the given ID from the database
      * 
      * @param int $id
-     * @return App\Entity\Entry
+     * @return \App\Entity\Entry
      */
     public function loadById(int $id) {
 
@@ -170,6 +170,7 @@ class EntryModel extends BaseModel {
         $entry->setBreak($data["break"]);
         $entry->setExp($data["exp"]);
         $entry->setNote($data["note"]);
+        $entry->setUserId($data["userid"]);
 
         return $entry;
     }
