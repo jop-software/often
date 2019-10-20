@@ -12,11 +12,11 @@
 
 <check if="{{ @SESSION.userid }}">
     <true>
-        <a href="{{ @app.base }}/entry/create"><button>New</button></a>
-        <a href="{{ @app.base }}/logout"><button>Logout</button></a>        
+        <a href="{{ @app.base }}/entry/create"><button>{{ @language.dashboard.new }}</button></a>
+        <a href="{{ @app.base }}/logout"><button>{{ @language.dashboard.logout }}</button></a>        
     </true>
     <false>
-        <a href="{{ @app.base }}/login"><button>Login</button></a>
-        <a href="{{ @app.base }}/register"><button>Register</button></a>
+        <a href="{{ @app.base }}/login"><button>{{ @language.dashboard.login }}</button></a>
+        <a href="{{ @app.base }}/register"><button>{{ @language.dashboard.register }}</button></a>
     </false>
 </check>
