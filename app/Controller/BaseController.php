@@ -2,6 +2,7 @@
 
 namespace App\Controller;
 
+use App\Entity\User;
 use Base;
 use Prefab;
 use Template;
@@ -20,6 +21,19 @@ class BaseController extends Prefab
     public function __construct()
     {
         $this->f3 = Base::instance();
+
+        if ($userid = $this->f3->get("SESSION.userid")) {
+            $user = new User();
+            $user->setId($userid);
+
+            $user->tryConstruct();
+
+            $language = $user->getLanguage();
+
+            if (file_exists("app/config/languages/$language.cfg")) {
+                $this->f3->config("../config/languages/$language.cfg");
+            }
+        }
     }
 
     /**
