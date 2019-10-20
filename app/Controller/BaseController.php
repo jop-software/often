@@ -31,7 +31,7 @@ class BaseController extends Prefab
             $language = $user->getLanguage();
 
             if (file_exists("app/config/languages/$language.cfg")) {
-                $this->f3->config("../config/languages/$language.cfg");
+                $this->f3->config("app/config/languages/$language.cfg");
             }
         }
     }
