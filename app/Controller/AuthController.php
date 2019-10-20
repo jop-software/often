@@ -37,9 +37,11 @@ class AuthController extends BaseController
     {
         $username = $this->f3->get("POST.username");
         $password = $this->f3->get("POST.password");
+        $language = $this->f3->get("POST.language");
 
         $user = new User();
         $user->setUsername($username);
+        $user->setLanguage($language);
 
         // check if the username already exists in database
         // todo: do we need this in Entry\User or should we create a new UserModel here and check?
