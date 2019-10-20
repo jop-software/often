@@ -16,6 +16,13 @@
         <input type="password" name="password" id="password">
     </div>
     <div class="form-group">
+        <label for="language">Language</label>
+        <select name="language" id="language">
+            <option value="de_de">Deutsch</option>
+            <option value="en_us">English</option>
+        </select>
+    </div>
+    <div class="form-group">
         <input type="submit" value="Register">
     </div>
 </form>
