@@ -101,6 +101,7 @@ class User {
         if ($success) {
             $this->username = $user->getUsername();
             $this->id = $user->getId();
+            $this->language = $user->getLanguage();
             return true;
         } else return false;
     }
