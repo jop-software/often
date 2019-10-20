@@ -37,9 +37,11 @@ class UserModel extends BaseModel {
             ->values([
                 "username" => "?",
                 "password" => "?",
+                "language" => "?",
             ])
             ->setParameter(0, $user->getUsername())
-            ->setParameter(1, $user->getPassword());
+            ->setParameter(1, $user->getPassword())
+            ->setParameter(2, $user->getLanguage());
 
         $queryBuilder->execute();
     }
@@ -81,7 +83,7 @@ class UserModel extends BaseModel {
      */
     public function getUserFromUsername(string $username) {
         $queryBuilder = $this->getQueryBuilder()
-            ->select("id")
+            ->select("id", "language")
             ->from("user")
             ->where("username = ?")
             ->setParameter(0, $username);
@@ -92,6 +94,7 @@ class UserModel extends BaseModel {
             $result = $result->fetchAll();
             $user = new User();
             $user->setId($result[0]["id"]);
+            $user->setLanguage($result[0]["language"]);
             $user->setUsername($username);
 
             return $user;
@@ -104,7 +107,7 @@ class UserModel extends BaseModel {
      */
     public function getUserFromId(int $id) {
         $queryBuilder = $this->getQueryBuilder()
-            ->select("username")
+            ->select("username", "language")
             ->from("user")
             ->where("id = ?")
             ->setParameter(0, $id);
@@ -112,9 +115,11 @@ class UserModel extends BaseModel {
         $result = $queryBuilder->execute();
 
         if ($result->rowCount() >= 1) {
+            $result = $result->fetchAll();
             $user = new User();
             $user->setId($id);
-            $user->setUsername($result->fetchAll()[0]["username"]);
+            $user->setUsername($result[0]["username"]);
+            $user->setLanguage($result[0]["language"]);
 
             return $user;
         } else return false;
