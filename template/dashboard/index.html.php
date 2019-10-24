@@ -13,7 +13,7 @@
 <check if="{{ @SESSION.userid }}">
     <true>
         <a href="{{ @app.base }}/entry/create"><button>{{ @language.dashboard.new }}</button></a>
-        <a href="{{ @app.base }}/logout"><button>{{ @language.dashboard.logout }}</button></a>        
+        <a href="{{ @app.base }}/logout"><button>{{ @language.dashboard.logout }}</button></a>
     </true>
     <false>
         <a href="{{ @app.base }}/login"><button>{{ @language.dashboard.login }}</button></a>
