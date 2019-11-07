@@ -9,6 +9,7 @@ use Base;
 class EntryController extends BaseController {
 
     public function createAction() {
+        $this->f3->set("vars.date", date("Y-m-d"));
         echo $this->render("entry/create.html.php");
     }
 

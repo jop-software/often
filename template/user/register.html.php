@@ -1,7 +1,7 @@
 <style>
-.form-group {
-    display: block;
-}    
+    .form-group {
+        display: block;
+    }
 </style>
 
 <h1>{{ @language.register.title }}</h1>

@@ -1,9 +1,8 @@
-<h1><a href="{{@app.base}}/dashboard"><-</a>{{ @language.entry.create }}</h1>
-
+<h1><a href="{{@app.base}}/dashboard"><-</a> {{ @language.entry.create }}</h1> 
 <form action="{{ @app.base }}/createEntry" method="POST">
     <div class="form-group">
         <label for="date">{{ @language.entry.date }}:</label>
-        <input type="date" name="date" id="date">
+        <input type="date" name="date" id="date" value="{{ @vars.date }}">
     </div>
     <div class="form-group">
         <label for="start">{{ @language.entry.start }}:</label>
