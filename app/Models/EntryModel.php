@@ -127,11 +127,13 @@ class EntryModel extends BaseModel {
         $queryBuilder->execute();
     }
 
-    public function loadMonths() {
+    public function loadMonths(int $userid) {
         $queryBuilder = $this->getQueryBuilder()
             ->select("month(date) as month, year(date) as year")
             ->from("entry")
-            ->groupBy("month, year");
+            ->where("userid = ?")
+            ->groupBy("month, year")
+            ->setParameter(0, $userid);
 
         $result = $queryBuilder->execute();
 
