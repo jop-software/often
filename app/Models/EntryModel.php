@@ -4,13 +4,15 @@ namespace App\Models;
 
 use App\Entity\Entry;
 
-class EntryModel extends BaseModel {
+class EntryModel extends BaseModel
+{
 
     /**
      * Save the given Entry to the database
      * does create a new dataset in the database => do not use for updating!
      */
-    public function save(Entry $entry) {
+    public function save(Entry $entry)
+    {
         // Construct the queryBuilder
         $queryBuilder = $this->getQueryBuilder()
             ->insert("entry")
@@ -41,7 +43,8 @@ class EntryModel extends BaseModel {
      * @param int $id
      * @return \App\Entity\Entry
      */
-    public function loadById(int $id) {
+    public function loadById(int $id)
+    {
 
         $queryBuilder = $this->getQueryBuilder()
             ->select("*")
@@ -55,7 +58,7 @@ class EntryModel extends BaseModel {
 
             // get the data form the result
             $result = $result->fetchAll();
-            
+
             // create and return an new entry instance with the result
             return $this->createEntryFromResult($result);
         }
@@ -68,7 +71,8 @@ class EntryModel extends BaseModel {
      * @param Entry $entry
      * @return bool
      */
-    public function update(Entry $entry) {
+    public function update(Entry $entry)
+    {
         $mapper = $this->getMapper("entry");
 
         $mapper->load(["ID = ?", $entry->getId()]);
@@ -88,7 +92,8 @@ class EntryModel extends BaseModel {
      * 
      * @return Entry[]
      */
-    public function loadAllFromUser(int $userid) {
+    public function loadAllFromUser(int $userid)
+    {
         $queryBuilder = $this->getQueryBuilder()
             ->select("*")
             ->from("entry")
@@ -111,14 +116,13 @@ class EntryModel extends BaseModel {
                 return $entries;
             }
         }
-        
-    
     }
 
     /**
      * delete the entry with the given id from the database
      */
-    public function deleteById(int $id) {
+    public function deleteById(int $id)
+    {
         $queryBuilder = $this->getQueryBuilder()
             ->delete("entry")
             ->where("ID = ?")
@@ -127,7 +131,8 @@ class EntryModel extends BaseModel {
         $queryBuilder->execute();
     }
 
-    public function loadMonthsFromUser(int $userid) {
+    public function loadMonthsFromUser(int $userid)
+    {
         $queryBuilder = $this->getQueryBuilder()
             ->select("month(date) as month, year(date) as year")
             ->from("entry")
@@ -149,6 +154,36 @@ class EntryModel extends BaseModel {
         }
     }
 
+    public function loadEntriesFromUserInMonthAndYear(int $userId, string $month, string $year)
+    {
+        $queryBuilder = $this->getQueryBuilder()
+            ->select("*")
+            ->from("entry")
+            ->where("userid = ?")
+            ->andWhere("year(entry.date) = ?")
+            ->andWhere("month(entry.date) = ?")
+            ->setParameter(0, $userId)
+            ->setParameter(1, $year)
+            ->setParameter(2, $month);
+
+        $result = $queryBuilder->execute();
+
+        if ($result->rowCount() >= 1) {
+            // get the data form the result
+            $result = $result->fetchAll();
+
+            // create and return an new entry instance with the result
+            $entries =  $this->createEntryFromResult($result);
+
+            // make sure to return an array
+            if (!is_array($entries)) {
+                return [$entries];
+            } else {
+                return $entries;
+            }
+        }
+    }
+
     /**
      * creates a App\Entity\Entry instance with the data from the given result
      * returns an array of instances if $result has two dimension
@@ -156,7 +191,8 @@ class EntryModel extends BaseModel {
      * @param array $result
      * @return \App\Entity\Entry | \App\Entity\Entry[]
      */
-    private function createEntryFromResult(array $result) {
+    private function createEntryFromResult(array $result)
+    {
         // check if the first element in the given array is an array
         // => if so, we have to return an array of instances
         // => if not, we can create a single instace from the array
@@ -183,7 +219,8 @@ class EntryModel extends BaseModel {
      * @param array $data
      * @return \App\Entity\Entry
      */
-    private function createSingleInstance(array $data) {
+    private function createSingleInstance(array $data)
+    {
         $entry = new Entry();
         $entry->setId($data["ID"]);
         $entry->setDate($data["date"]);
@@ -196,5 +233,4 @@ class EntryModel extends BaseModel {
 
         return $entry;
     }
-
 }
