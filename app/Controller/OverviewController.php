@@ -3,6 +3,7 @@
 namespace App\Controller;
 
 use App\Models\EntryModel;
+use App\Services\MonthConverterService;
 
 class OverviewController extends BaseController {
 
@@ -18,7 +19,17 @@ class OverviewController extends BaseController {
 
     public function monthAction($_, $params)
     {
-        echo $params["month"];
+        $params = $this->f3->clean($params);
+        $month = $params["month"];
+        $year = $params["year"];
+        $monthName = MonthConverterService::instance()->getName($month);
+
+        echo $this->render("overview/month.html.php", [
+            "year" => $year,
+            "month" => $month,
+            "monthname" => $monthName
+        ]);
+        
     }
 
 }
