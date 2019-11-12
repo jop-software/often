@@ -127,7 +127,7 @@ class EntryModel extends BaseModel {
         $queryBuilder->execute();
     }
 
-    public function loadMonths(int $userid) {
+    public function loadMonthsFromUser(int $userid) {
         $queryBuilder = $this->getQueryBuilder()
             ->select("month(date) as month, year(date) as year")
             ->from("entry")

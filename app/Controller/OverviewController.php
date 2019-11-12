@@ -10,7 +10,7 @@ class OverviewController extends BaseController {
     {
         $userId = $this->f3->get("SESSION.userid");
         $model = new EntryModel();
-        $months = $model->loadMonths($userId);
+        $months = $model->loadMonthsFromUser($userId);
         echo $this->render("overview/index.html.php",[
             "months" => $months
         ]);
