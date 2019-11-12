@@ -16,4 +16,9 @@ class OverviewController extends BaseController {
         ]);
     }
 
+    public function monthAction($_, $params)
+    {
+        echo $params["month"];
+    }
+
 }
