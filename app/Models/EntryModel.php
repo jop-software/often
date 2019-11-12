@@ -127,6 +127,26 @@ class EntryModel extends BaseModel {
         $queryBuilder->execute();
     }
 
+    public function loadMonths() {
+        $queryBuilder = $this->getQueryBuilder()
+            ->select("month(date) as month, year(date) as year")
+            ->from("entry")
+            ->groupBy("month, year");
+
+        $result = $queryBuilder->execute();
+
+        if ($result->rowCount() >= 1) {
+            $result = $result->fetchAll();
+
+            // make sure to return array
+            if (!is_array($result)) {
+                return [$result];
+            } else {
+                return $result;
+            }
+        }
+    }
+
     /**
      * creates a App\Entity\Entry instance with the data from the given result
      * returns an array of instances if $result has two dimension
