@@ -4,6 +4,7 @@ namespace App\Controller;
 
 use App\Entity\Entry;
 use App\Models\EntryModel;
+use App\Models\UserModel;
 use Base;
 
 class EntryController extends BaseController {
@@ -91,7 +92,18 @@ class EntryController extends BaseController {
     public function delete() {
         $id = $this->f3->get("POST.id");
 
-        (new EntryModel())->deleteById($id);
+        $user_id = $this->f3->get("SESSION.userid");
+
+        $entry = (new EntryModel())->loadById($id);
+
+        // check if the user owns the entry he wants to delete
+        if ($entry->getUserId() === $user_id) {
+            (new EntryModel())->deleteById($id);
+        } else {
+            // otherwies, reroute to dashboard
+            $this->f3->reroute("/dashboard");
+        }
+
 
         $this->f3->reroute("/dashboard");
     }

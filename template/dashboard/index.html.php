@@ -21,3 +21,5 @@
         <a href="{{ @app.base }}/register"><button>{{ @language.dashboard.register }}</button></a>
     </false>
 </check>
+
+<p><a href="{{ @customization.urls.IMPRESS }}" target="_blank">Impress</a></p>

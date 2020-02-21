@@ -73,18 +73,25 @@ class EntryModel extends BaseModel
      */
     public function update(Entry $entry)
     {
-        $mapper = $this->getMapper("entry");
 
-        $mapper->load(["ID = ?", $entry->getId()]);
+        $queryBuilder = $this->getQueryBuilder()
+            ->update("entry")
+            ->set("date", "?")
+            ->set("start", "?")
+            ->set("end", "?")
+            ->set("break", "?")
+            ->set("exp", "?")
+            ->set("note", "?")
+            ->where("ID = ?")
+            ->setParameter(0, $entry->getDate())
+            ->setParameter(1, $entry->getStart())
+            ->setParameter(2, $entry->getEnd())
+            ->setParameter(3, $entry->getBreak())
+            ->setParameter(4, $entry->getExp())
+            ->setParameter(5, $entry->getNote())
+            ->setParameter(6, $entry->getId());
 
-        $mapper->date = $entry->getDate();
-        $mapper->start = $entry->getStart();
-        $mapper->end = $entry->getEnd();
-        $mapper->break = $entry->getBreak();
-        $mapper->exp = $entry->getExp();
-        $mapper->note = $entry->getNote();
-
-        return $mapper->update();
+        $queryBuilder->execute();
     }
 
     /**

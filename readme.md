@@ -10,5 +10,5 @@ simple overtime tracking tool
 5. migrate database with doctrine "vendor\bin\doctrine-migrations migrations:migrate"
 
 # Hosted
-I will host an version of often at often.jocode.org
-Sate: planned
+You can use my hostet version on:
+[http://often.jocode.org](http://often.jocode.org)

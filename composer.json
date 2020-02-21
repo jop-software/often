@@ -10,9 +10,9 @@
         }
     ],
     "require": {
-        "bcosca/fatfree": "^3.6",
         "doctrine/migrations": "^2.1",
-        "twig/twig": "^3.0"
+        "bcosca/fatfree-core": "^3.7",
+        "deployer/deployer": "^6.7"
     },
     "autoload": {
         "psr-4": {
