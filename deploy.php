@@ -23,7 +23,7 @@ set('allow_anonymous_stats', false);
 // Hosts
 
 host('johannesprzymusinski.de')
-    ->set('deploy_path', '/var/www/vhosts/often-test');
+    ->set('deploy_path', '/var/www/vhosts/often');
     
 
 // Tasks
