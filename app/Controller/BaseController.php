@@ -63,6 +63,8 @@ class BaseController extends Prefab
 
     /**
      * Render a template with given parameters
+     *
+     * @deprecated
      */
     public function render(string $templateName, array $params = [], bool $clearErrors = true) {
 
@@ -73,15 +75,26 @@ class BaseController extends Prefab
 
         $this->f3->set("GUI.template", $templateName);
         $template = Template::instance()->render("base.html.php");
-        
+
         // we have to clear the errors after the render, but before the end
         // of this function
 
         // check if the $clearErrors flag is set
         // if so, call the clearErrors function
         if ($clearErrors) $this->clearErrors();
-        
+
         return $template;
+    }
+
+    /**
+     * Render a TWIG-Template
+     *
+     * @param string $name name of the template
+     * @param array $params all needed parameters for the template
+     */
+    public function renderTwig(string $name, array $params)
+    {
+        // TODO: implement
     }
 
     /**
