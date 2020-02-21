@@ -1,23 +1,23 @@
 {
     "_readme": [
         "This file locks the dependencies of your project to a known state",
-        "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
+        "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "content-hash": "1eef9ed2651243f97a8f807dab4075e9",
+    "content-hash": "a2ac1a909b23c70b615f5c6f2edabf0a",
     "packages": [
         {
-            "name": "bcosca/fatfree",
-            "version": "3.6.5",
+            "name": "bcosca/fatfree-core",
+            "version": "3.7.1",
             "source": {
                 "type": "git",
-                "url": "https://github.com/bcosca/fatfree.git",
-                "reference": "a841d838e8f146486d85e4947fb92e2fa78fdeb8"
+                "url": "https://github.com/bcosca/fatfree-core.git",
+                "reference": "64318caa00de4da0f558d2334dc70538bdbcd1ad"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/bcosca/fatfree/zipball/a841d838e8f146486d85e4947fb92e2fa78fdeb8",
-                "reference": "a841d838e8f146486d85e4947fb92e2fa78fdeb8",
+                "url": "https://api.github.com/repos/bcosca/fatfree-core/zipball/64318caa00de4da0f558d2334dc70538bdbcd1ad",
+                "reference": "64318caa00de4da0f558d2334dc70538bdbcd1ad",
                 "shasum": ""
             },
             "require": {
@@ -25,8 +25,8 @@
             },
             "type": "library",
             "autoload": {
-                "files": [
-                    "lib/base.php"
+                "classmap": [
+                    "."
                 ]
             },
             "notification-url": "https://packagist.org/downloads/",
@@ -35,7 +35,7 @@
             ],
             "description": "A powerful yet easy-to-use PHP micro-framework designed to help you build dynamic and robust Web applications - fast!",
             "homepage": "http://fatfreeframework.com/",
-            "time": "2018-12-24T13:43:34+00:00"
+            "time": "2019-12-30T20:49:06+00:00"
         },
         {
             "name": "doctrine/cache",
@@ -880,6 +880,7 @@
                 "code",
                 "zf"
             ],
+            "abandoned": "laminas/laminas-code",
             "time": "2019-10-05T23:18:22+00:00"
         },
         {
@@ -934,6 +935,7 @@
                 "events",
                 "zf2"
             ],
+            "abandoned": "laminas/laminas-eventmanager",
             "time": "2018-04-25T15:33:34+00:00"
         }
     ],
