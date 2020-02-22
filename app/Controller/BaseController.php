@@ -94,7 +94,7 @@ class BaseController extends Prefab
      * @param string $name name of the template
      * @param array $params all needed parameters for the template
      */
-    public function renderTwig(string $name, array $params)
+    public function renderTwig(string $name, array $params = array())
     {
         $loader = new FilesystemLoader($this->f3->get("twig.path"));
         $twig = new Environment($loader);
