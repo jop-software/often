@@ -105,6 +105,7 @@ class EntryModel extends BaseModel
             ->select("*")
             ->from("entry")
             ->where("userid = ?")
+            ->orderBy("date", "asc")
             ->setParameter(0, $userid);
 
         $result = $queryBuilder->execute();
