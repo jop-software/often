@@ -6,6 +6,8 @@ use App\Entity\User;
 use Base;
 use Prefab;
 use Template;
+use Twig\Environment;
+use Twig\Loader\FilesystemLoader;
 
 class BaseController extends Prefab
 {
@@ -94,7 +96,12 @@ class BaseController extends Prefab
      */
     public function renderTwig(string $name, array $params)
     {
-        // TODO: implement
+        $loader = new FilesystemLoader($this->f3->get("twig.path"));
+        $twig = new Environment($loader);
+
+        $params["base"] = $this->f3->get("BASE");
+
+        return $twig->render($name, $params);
     }
 
     /**
