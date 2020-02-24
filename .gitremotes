@@ -1,5 +1,0 @@
-[remote "origin"]
-	url = git@github.com:cngJo/often.git
-	fetch = +refs/heads/*:refs/remotes/origin/*
-	pushurl = git@github.com:cngJo/often.git
-	pushurl = http://git.johannesprzymusinski.de/Johannes/often.git
