@@ -56,7 +56,8 @@ class AuthController extends BaseController
 
         $user = new User();
         $user->setUsername($username);
-        $user->setLanguage($language);
+        // todo: remove check for language in register and add user profile where the user can change the language
+        // $user->setLanguage($language);
 
         // check if the username already exists in database
         // todo: do we need this in Entry\User or should we create a new UserModel here and check?
