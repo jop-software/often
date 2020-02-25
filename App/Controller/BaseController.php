@@ -3,6 +3,8 @@
 namespace App\Controller;
 
 use App\Entity\User;
+use App\Models\EntryModel;
+use App\Models\UserModel;
 use Base;
 use Prefab;
 use Template;
@@ -110,7 +112,7 @@ class BaseController extends Prefab
     public function beforeRoute() {
         // check if the user is logged in
         if (!$this->f3->get("SESSION.userid")) {
-            $this->f3->reroute("/dashboard");
+            $this->f3->reroute("/auth");
         }
     }
 
