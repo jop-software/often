@@ -103,7 +103,12 @@ class BaseController extends Prefab
 
         $params["base"] = $this->f3->get("BASE");
 
-        return $twig->render($name, $params);
+        $html = $twig->render($name, $params);
+
+        // clear session errors
+        $this->clearErrors();
+
+        return $html;
     }
 
     /**

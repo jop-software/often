@@ -44,7 +44,7 @@ class AuthController extends BaseController
             $this->f3->set("SESSION.userid", $user->getId());
             $this->f3->reroute("/dashboard");
         } else {
-            $this->f3->reroute("/login");
+            $this->f3->reroute("/auth");
         }
     }
 
@@ -79,7 +79,7 @@ class AuthController extends BaseController
 
             $this->f3->reroute("/dashboard");
         } else {
-            $this->f3->reroute("/register");
+            $this->f3->reroute("/auth");
         }
     }
 
