@@ -9,6 +9,21 @@ class AuthController extends BaseController
 {
 
     /**
+     * Handler for POST /auth
+     * desides on the form action parameter if the user gets logged in or register
+     */
+    public function auth()
+    {
+        $form = $this->f3->get("POST");
+
+        if ($form["action"] === "Login") {
+            $this->loginuser();
+        } else {
+            $this->registerUser();
+        }
+    }
+
+    /**
      * internal handle for logging users in
      */
     public function loginUser()
