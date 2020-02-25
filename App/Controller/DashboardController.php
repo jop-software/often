@@ -29,7 +29,7 @@ class DashboardController extends BaseController
         $hours = ($totalSeconds / (60 * 60)) % 24;
 
         // format hours and minutes
-        $hours = $hours <= 9 
+        $hours = $hours <= 9
             ? $hours < 0 
                 ? str_split($hours)[0] . "0" . str_split($hours)[1] 
                 : "0$hours" 
@@ -51,15 +51,6 @@ class DashboardController extends BaseController
             "totalSeconds" => $totalSeconds,
             "totalTime" => "$hours:$minutes"
         ]);
-    }
-
-    /**
-     * Override from BaseController
-     */
-    public function beforeRoute()
-    {
-        // do nothing
-        // => we want the dashboard route available for everyone
     }
 
 }
