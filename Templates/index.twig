@@ -3,10 +3,10 @@
     <head>
         <title>OFTEN</title>
 
-        {# TODO: HTTP 404 on all references to /vendor/ #}
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
         {# Include jQuery #}
-        <script src="{{ base }}/vendor/components/jquery/jquery.js.min"></script>
+        <script src="{{ base }}/vendor/components/jquery/jquery.js"></script>
 
         {# Include Bootstrap #}
         <link rel="stylesheet" href="{{ base }}/vendor/components/bootstrap/css/bootstrap.css">
@@ -17,6 +17,8 @@
             {% include "components/navigation.twig" %}
         {% endblock %}
 
-        {% block content %}{% endblock %}
+        <div class="container-fluid">
+            {% block content %}{% endblock %}
+        </div>
     </body>
 </html>
