@@ -42,11 +42,12 @@ task('deploy', [
     'deploy:symlink',
     'deploy:unlock',
     'cleanup',
-    'success'
+    'success',
+    "copy_config"
 ]);
 
 task("copy_config", function() {
-    run("cp ~/config/often.config.ini /var/www/vhosts/oten/current/config.ini");
+    run("cp ~/config/often.config.ini /var/www/vhosts/often/current/config.ini");
 });
 
 // [Optional] If deploy fails automatically unlock.
