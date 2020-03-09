@@ -45,5 +45,9 @@ task('deploy', [
     'success'
 ]);
 
+task("copy_config", function() {
+    run("cp ~/config/often.config.ini /var/www/vhosts/oten/current/config.ini");
+});
+
 // [Optional] If deploy fails automatically unlock.
 after('deploy:failed', 'deploy:unlock');
