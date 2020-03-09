@@ -43,11 +43,17 @@ task('deploy', [
     'deploy:unlock',
     'cleanup',
     'success',
-    "copy_config"
+    "copy_config",
+    "init_folders"
 ]);
 
 task("copy_config", function() {
     run("cp ~/config/often.config.ini /var/www/vhosts/often/current/config.ini");
+});
+
+task("init_folders", function() {
+    run("mkdir /var/www/vhosts/often/current/tmp");
+    run("chmod -R 777 /var/www/vhosts/often/current/tmp");
 });
 
 // [Optional] If deploy fails automatically unlock.
