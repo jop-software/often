@@ -45,8 +45,8 @@ class DashboardController extends BaseController
             $user->tryConstruct();
         }
 
-        echo $this->render("dashboard/index.html.php", [
-            "username" => isset($user) ? $user->getUsername() : "",
+        echo $this->renderTwig("dashboard.twig", [
+            "user" => $user,
             "entries" => $entries,
             "totalSeconds" => $totalSeconds,
             "totalTime" => "$hours:$minutes"
