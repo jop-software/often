@@ -162,7 +162,8 @@ class Entry {
         return [
             $hours,
             $minutes,
-            $diff
+            $diff,
+            "print" => "$hours:$minutes"
         ];
     }
 

@@ -49,7 +49,7 @@
                             <label for="pause">Differenz</label>
                             {% set difference = entry.getWorktimeDifference() %}
                             {# TODO: extract css into external stylesheet #}
-                            <div type="time" name="pause" id="pause" class="form-control" disabled style="background-color:#e9ecef">{{ difference[0] }}:{{ difference[1] }}</div>
+                            <div type="time" name="pause" id="pause" class="form-control" disabled style="background-color:#e9ecef">{{ difference.print }}</div>
                         </div>
                     </div>
                 </div>

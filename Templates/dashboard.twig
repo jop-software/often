@@ -18,7 +18,7 @@
                 {% for entry in entries %}
                     {# TOOD: date parameter configurable per user #}
                     {% set difference = entry.getWorktimeDifference() %}
-                    <a href="{{ base }}/entry/{{ entry.getId() }}" class="list-group-item">{{ entry.getDate()|date("Y.m.d") }} ({{ difference[0] }}:{{ difference[1] }})</a>
+                    <a href="{{ base }}/entry/{{ entry.getId() }}" class="list-group-item">{{ entry.getDate()|date("Y.m.d") }} ({{ difference.print }})</a>
                 {% endfor %}
             </ul>
         </div>
