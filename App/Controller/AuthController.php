@@ -9,6 +9,21 @@ class AuthController extends BaseController
 {
 
     /**
+     * Handler for POST /auth
+     * desides on the form action parameter if the user gets logged in or register
+     */
+    public function auth()
+    {
+        $form = $this->f3->get("POST");
+
+        if ($form["action"] === "Login") {
+            $this->loginuser();
+        } else {
+            $this->registerUser();
+        }
+    }
+
+    /**
      * internal handle for logging users in
      */
     public function loginUser()
@@ -29,7 +44,7 @@ class AuthController extends BaseController
             $this->f3->set("SESSION.userid", $user->getId());
             $this->f3->reroute("/dashboard");
         } else {
-            $this->f3->reroute("/login");
+            $this->f3->reroute("/auth");
         }
     }
 
@@ -41,7 +56,9 @@ class AuthController extends BaseController
 
         $user = new User();
         $user->setUsername($username);
-        $user->setLanguage($language);
+        // todo: remove check for language in register and add user profile where the user can change the language
+        //  we currently default to english
+        $user->setLanguage("en_en");
 
         // check if the username already exists in database
         // todo: do we need this in Entry\User or should we create a new UserModel here and check?
@@ -62,7 +79,7 @@ class AuthController extends BaseController
 
             $this->f3->reroute("/dashboard");
         } else {
-            $this->f3->reroute("/register");
+            $this->f3->reroute("/auth");
         }
     }
 

@@ -23,7 +23,7 @@ set('allow_anonymous_stats', false);
 // Hosts
 
 host('johannesprzymusinski.de')
-    ->set('deploy_path', '/var/www/vhosts/often-test');
+    ->set('deploy_path', '/var/www/vhosts/often');
     
 
 // Tasks
@@ -42,8 +42,19 @@ task('deploy', [
     'deploy:symlink',
     'deploy:unlock',
     'cleanup',
-    'success'
+    'success',
+    "copy_config",
+    "init_folders"
 ]);
+
+task("copy_config", function() {
+    run("cp ~/config/often.config.ini /var/www/vhosts/often/current/config.ini");
+});
+
+task("init_folders", function() {
+    run("mkdir /var/www/vhosts/often/current/tmp");
+    run("chmod -R 777 /var/www/vhosts/often/current/tmp");
+});
 
 // [Optional] If deploy fails automatically unlock.
 after('deploy:failed', 'deploy:unlock');

@@ -17,8 +17,8 @@
         <a href="{{ @app.base }}/logout"><button>{{ @language.dashboard.logout }}</button></a>
     </true>
     <false>
-        <a href="{{ @app.base }}/login"><button>{{ @language.dashboard.login }}</button></a>
-        <a href="{{ @app.base }}/register"><button>{{ @language.dashboard.register }}</button></a>
+        <a href="{{ @app.base }}/auth"><button>{{ @language.dashboard.login }}</button></a>
+        <a href="{{ @app.base }}/auth"><button>{{ @language.dashboard.register }}</button></a>
     </false>
 </check>
 

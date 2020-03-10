@@ -3,9 +3,13 @@
 namespace App\Controller;
 
 use App\Entity\User;
+use App\Models\EntryModel;
+use App\Models\UserModel;
 use Base;
 use Prefab;
 use Template;
+use Twig\Environment;
+use Twig\Loader\FilesystemLoader;
 
 class BaseController extends Prefab
 {
@@ -63,6 +67,8 @@ class BaseController extends Prefab
 
     /**
      * Render a template with given parameters
+     *
+     * @deprecated
      */
     public function render(string $templateName, array $params = [], bool $clearErrors = true) {
 
@@ -73,15 +79,42 @@ class BaseController extends Prefab
 
         $this->f3->set("GUI.template", $templateName);
         $template = Template::instance()->render("base.html.php");
-        
+
         // we have to clear the errors after the render, but before the end
         // of this function
 
         // check if the $clearErrors flag is set
         // if so, call the clearErrors function
         if ($clearErrors) $this->clearErrors();
-        
+
         return $template;
+    }
+
+    /**
+     * Render a TWIG-Template
+     *
+     * @param string $name name of the template
+     * @param array $params all needed parameters for the template
+     */
+    public function renderTwig(string $name, array $params = array())
+    {
+        $loader = new FilesystemLoader($this->f3->get("twig.path"));
+        $twig = new Environment($loader);
+
+        $userModel = new UserModel();
+
+        $params["base"] = $this->f3->get("BASE");
+
+        if ($userId = $this->f3->get("SESSION.userid")) {
+            $params["loggedin_user"] = $userModel->getUserFromId($this->f3->get("SESSION.userid"));
+        }
+
+        $html = $twig->render($name, $params);
+
+        // clear session errors
+        $this->clearErrors();
+
+        return $html;
     }
 
     /**
@@ -90,7 +123,7 @@ class BaseController extends Prefab
     public function beforeRoute() {
         // check if the user is logged in
         if (!$this->f3->get("SESSION.userid")) {
-            $this->f3->reroute("/dashboard");
+            $this->f3->reroute("/auth");
         }
     }
 

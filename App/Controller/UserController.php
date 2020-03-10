@@ -5,23 +5,11 @@ namespace App\Controller;
 class UserController extends BaseController {
 
     /**
-     * loginAction
-     * GET /login
-     * 
-     * render form, where the user can enter credentials and login
+     * show the Auth dialog
      */
-    public function loginAction() {
-        echo $this->render("user/login.html.php");
-    }
-
-    /**
-     * registerAction
-     * GET /register
-     * 
-     * render form for the user to register
-     */
-    public function registerAction() {
-        echo $this->render("user/register.html.php");
+    public function authAction()
+    {
+        echo $this->renderTwig("auth/auth.twig");
     }
 
     /**
