@@ -11,7 +11,7 @@ class EntryController extends BaseController {
 
     public function createAction() {
         $this->f3->set("vars.date", date("Y-m-d"));
-        echo $this->render("entry/create.html.php");
+        echo $this->renderTwig("new_entry.twig", []);
     }
 
     public function create(Base $f3, array $params) {
@@ -37,7 +37,7 @@ class EntryController extends BaseController {
 
         $entryModel = new EntryModel();
         $entryModel->save($entry);
-        
+
         // reroute to dashboard
         $this->f3->reroute("/dashboard");
     }
@@ -52,7 +52,7 @@ class EntryController extends BaseController {
 
         echo $this->render("entry/edit.html.php", [
             "entry" => $entry,
-        ]); 
+        ]);
     }
 
     /**
@@ -78,7 +78,7 @@ class EntryController extends BaseController {
 
         // check if the user is the owner of this entry
         $this->checkUser($this->f3->get("SESSION.userid"), $id);
-        
+
         $entry = (new EntryModel())->loadById($id);
 
         echo $this->render("entry/delete.html.php", [
@@ -115,7 +115,7 @@ class EntryController extends BaseController {
         $this->checkUser($this->f3->get("SESSION.userid"), $id);
 
         $entry = (new EntryModel())->loadById($id);
-        
+
         echo $this->render("entry/show.html.php", [
             "entry" => $entry,
         ]);
