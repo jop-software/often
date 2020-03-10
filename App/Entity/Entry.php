@@ -170,7 +170,8 @@ class Entry {
             $hours,
             $minutes,
             $diff,
-            "print" => "$flag$hours:$minutes"
+            "print" => "$flag$hours:$minutes",
+            "flag" => $flag
         ];
     }
 
