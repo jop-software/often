@@ -145,18 +145,23 @@ class Entry {
         $minutes = ($diff / (60)) % 60;
         $hours = ($diff / (60 * 60)) % 24;
 
+        // prepare values for return
+        $hours = $hours <= 9 
+                ? $hours < 0 
+                    ? str_split($hours)[0] . "0" . str_split($hours)[1] 
+                    : "0$hours" 
+                : $hours;
+
+        $minutes = $minutes <= 9 
+            ? "0$minutes" 
+            : $minutes;
+
         // return the hours (with sign), minutes an total seconds
         // hours / minutes for rendering in views
         // total seconds (with sign) for further calculation
         return [
-            $hours <= 9 
-                ? $hours < 0 
-                    ? str_split($hours)[0] . "0" . str_split($hours)[1] 
-                    : "0$hours" 
-                : $hours,
-            $minutes <= 9 
-                ? "0$minutes" 
-                : $minutes,
+            $hours,
+            $minutes,
             $diff
         ];
     }
