@@ -48,7 +48,11 @@ class Entry {
     }
 
     public function setBreak($break) {
-        $this->break = $break;
+        if ($break) {
+            $this->break = $break;
+        } else {
+            $this->break = (new DateInterval("PT0S"))->format("%H:%I:%S");
+        }
     }
 
     public function setExp($exp) {
