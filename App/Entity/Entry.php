@@ -141,6 +141,13 @@ class Entry {
         // $diff are seconds
         $diff = -($exp - $workedTime);
 
+        // check if the difference is negative
+        if ($diff < 0) {
+            // if so, set the flag to "-"
+            $flag = "-";
+        }
+        $diff = abs($diff);
+
         // work out hours and minutes
         $minutes = ($diff / (60)) % 60;
         $hours = ($diff / (60 * 60)) % 24;
@@ -163,7 +170,7 @@ class Entry {
             $hours,
             $minutes,
             $diff,
-            "print" => "$hours:$minutes"
+            "print" => "$flag$hours:$minutes"
         ];
     }
 
