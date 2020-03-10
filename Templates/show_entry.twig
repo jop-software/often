@@ -1,0 +1,76 @@
+{% extends "index.twig" %}
+
+{% block content %}
+    <div class="row">
+        <div class="col-lg-12">
+            <h1 class="text-center">Eintrag #{{ entry.getId() }}, vom {{ entry.getDate()|date("Y.m.d") }}</h1>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-lg-6 col-sm-6 col-md-6 offset-lg-3 offset-sm-3 offset-md-3">
+            <div class="container-fluid">
+                <div class="row">
+                    <div class="col-lg-6">
+                        <div class="form-group">
+                            <label for="date">Datum</label>
+                            <input type="date" name="date" id="date" class="form-control" value="{{ entry.getDate() }}" disabled>
+                        </div>
+                    </div>
+                    <div class="col-lg-6">
+                        <div class="form-group">
+                            <label for="exp">Erwartung</label>
+                            <input type="time" name="exp" id="exp" class="form-control" value="{{ entry.getExp() }}" disabled>
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-lg-6">
+                        <div class="form-group">
+                            <label for="start">Start</label>
+                            <input type="time" name="start" id="start" class="form-control" value="{{ entry.getStart() }}" disabled>
+                        </div>
+                    </div>
+                    <div class="col-lg-6">
+                        <div class="form-group">
+                            <label for="end">Ende</label>
+                            <input type="time" name="end" id="end" class="form-control" value="{{ entry.getEnd() }}" disabled>
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-lg-6">
+                        <div class="form-group">
+                            <label for="pause">Pause</label>
+                            <input type="time" name="pause" id="pause" class="form-control" value="{{ entry.getBreak() }}" disabled>
+                        </div>
+                    </div>
+                    <div class="col-lg-6">
+                        <div class="form-group">
+                            <label for="pause">Differenz</label>
+                            {% set difference = entry.getWorktimeDifference() %}
+                            {# TODO: extract css into external stylesheet #}
+                            <div type="time" name="pause" id="pause" class="form-control" disabled style="background-color:#e9ecef">{{ difference[0] }}:{{ difference[1] }}</div>
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-lg-12">
+                        <div class="form-group">
+                            <label for="note">Notizen</label>
+                            <textarea name="note" id="note" class="form-control" disabled>{{ entry.getNote() }}</textarea>
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-lg-12">
+                        <div class="btn-group w-100">
+                            <a href="{{ base }}/dashboard" class="btn btn-primary">Zurück</a>
+                            <a href="{{ base }}/entry/{{ entry.getId() }}/edit" class="btn btn-primary">Bearbeiten</a>
+                            <a href="{{ base }}/entry/{{ entry.getId() }}/delete" class="btn btn-danger">Löschen</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock %}
