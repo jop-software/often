@@ -101,7 +101,10 @@ class BaseController extends Prefab
         $loader = new FilesystemLoader($this->f3->get("twig.path"));
         $twig = new Environment($loader);
 
+        $userModel = new UserModel();
+
         $params["base"] = $this->f3->get("BASE");
+        $params["loggedin_user"] = $userModel->getUserFromId($this->f3->get("SESSION.userid"));
 
         $html = $twig->render($name, $params);
 
