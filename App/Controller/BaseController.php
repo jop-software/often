@@ -104,7 +104,10 @@ class BaseController extends Prefab
         $userModel = new UserModel();
 
         $params["base"] = $this->f3->get("BASE");
-        $params["loggedin_user"] = $userModel->getUserFromId($this->f3->get("SESSION.userid"));
+
+        if ($userId = $this->f3->get("SESSION.userid")) {
+            $params["loggedin_user"] = $userModel->getUserFromId($this->f3->get("SESSION.userid"));
+        }
 
         $html = $twig->render($name, $params);
 
