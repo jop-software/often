@@ -101,9 +101,9 @@ class EntryController extends BaseController {
             (new EntryModel())->deleteById($id);
         } else {
             // otherwies, reroute to dashboard
+            // TODO: show error message to the user
             $this->f3->reroute("/dashboard");
         }
-
 
         $this->f3->reroute("/dashboard");
     }
