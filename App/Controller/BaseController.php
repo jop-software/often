@@ -7,6 +7,7 @@ use App\Entity\User;
 use App\Models\EntryModel;
 use App\Models\UserModel;
 use Base;
+use Exception;
 use Prefab;
 use Template;
 use Twig\Environment;
@@ -94,7 +95,7 @@ class BaseController extends Prefab
 
         // check if the $clearErrors flag is set
         // if so, call the clearErrors function
-        if ($clearErrors) $this->clearErrors();
+        // if ($clearErrors) $this->clearErrors();
 
         return $template;
     }
@@ -113,15 +114,20 @@ class BaseController extends Prefab
         $userModel = new UserModel();
 
         $params["base"] = $this->f3->get("BASE");
+        $params["messages"] = SessionWrapper::getMessages();
 
         if ($userId = $this->f3->get("SESSION.userid")) {
             $params["loggedin_user"] = $userModel->getUserFromId($this->f3->get("SESSION.userid"));
         }
 
-        $html = $twig->render($name, $params);
-
-        // clear session errors
-        $this->clearErrors();
+        try {
+            $html = $twig->render($name, $params);
+        } catch (Exception $exception) {
+            $this->f3->error(500, "Something went wrong, rendering the Template $name.<br>{$exception->getMessage()}");
+        } finally {
+            // clear the messages in every case
+            SessionWrapper::clearMessages();
+        }
 
         return $html;
     }
