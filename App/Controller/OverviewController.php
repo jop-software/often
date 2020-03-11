@@ -13,6 +13,13 @@ class OverviewController extends BaseController {
         $model = new EntryModel();
         $months = $model->loadMonthsFromUser($userId);
 
+        // if $months = null => there are no entries
+        if (!$months) {
+            // reroute to dashboard
+            $this->message("Du hast noch keine Einträge, daher können wir leider keine Übersicht generieren.", "info");
+            $this->f3->reroute("/dashboard");
+        }
+
         // inject the month names into the $months array
         foreach ($months as $index => $month) {
             $months[$index]["name"] = MonthConverterService::instance()->getName($month["month"]);
@@ -36,15 +43,6 @@ class OverviewController extends BaseController {
         $year = $params["year"];
         $monthName = MonthConverterService::instance()->getName($month);
         $entries = $this->getEntriesInMonth($userId, $year, $month);
-
-        // echo $this->render("overview/month.html.php", [
-        //     "year" => $year,
-        //     "month" => $month,
-        //     "monthname" => $monthName,
-        //     "entries" => $entries["entries"],
-        //     "hours" => $entries["hours"],
-        //     "minutes" => $entries["minutes"]
-        // ]);
 
         echo $this->renderTwig("overview/month.twig", [
             "year" => $year,

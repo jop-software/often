@@ -44,6 +44,7 @@ class AuthController extends BaseController
             $this->f3->set("SESSION.userid", $user->getId());
             $this->f3->reroute("/dashboard");
         } else {
+            $this->error("Ungültige Anmeldedaten");
             $this->f3->reroute("/auth");
         }
     }
@@ -54,6 +55,9 @@ class AuthController extends BaseController
         $password = $this->f3->get("POST.password");
         $language = $this->f3->get("POST.language");
 
+        // flag keeps track of we had any errors during the registration
+        $errors = false;
+
         $user = new User();
         $user->setUsername($username);
         // todo: remove check for language in register and add user profile where the user can change the language
@@ -62,21 +66,23 @@ class AuthController extends BaseController
 
         // check if the username already exists in database
         // todo: do we need this in Entry\User or should we create a new UserModel here and check?
-        if ($user->usernameExistsInDB()) $this->error("Username <$username> already exists");
-
-        if (!$user->setPassword($password)) {
-            $this->error("Password is invalid");
+        if ($user->usernameExistsInDB()) {
+            $this->error("Der Benutzer $username existiert bereits.");
+            $error = true;
         }
 
-        // only create the user if we have no errors
-        if (!$this->hasErrors()) {
+        if (!$user->setPassword($password)) {
+            $this->error("Das Passwort ist zu kurz");
+            $error = true;
+        }
+
+        if (!$error) {
             $userModel = new UserModel();
             $userModel->createNewUser($user);
-
+            
             // log the user in
             $user->tryConstruct();
             $this->f3->set("SESSION.userid", $user->getId());
-
             $this->f3->reroute("/dashboard");
         } else {
             $this->f3->reroute("/auth");

@@ -7,6 +7,11 @@
         </div>
     </div>
     <div class="row">
+        <div class="col-lg-12">
+            {% include "components/messages.twig" %}
+        </div>
+    </div>
+    <div class="row">
         <div class="col-lg-6 col-sm-6 col-md-6 offset-lg-3 offset-sm-3 offset-md-3">
             <form action="{{ base }}/editEntry" method="post">
                 <input type="hidden" name="id" value="{{ entry.getId() }}">
@@ -43,7 +48,7 @@
                         <div class="col-lg-6">
                             <div class="form-group">
                                 <label for="pause">Pause</label>
-                                <input type="time" name="pause" id="pause" class="form-control" value="{{ entry.getBreak() }}" >
+                                <input type="time" name="break" id="pause" class="form-control" value="{{ entry.getBreak() }}" >
                             </div>
                         </div>
                     </div>
