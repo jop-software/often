@@ -16,6 +16,11 @@ class OverviewController extends BaseController {
         // inject the month names into the $months array
         foreach ($months as $index => $month) {
             $months[$index]["name"] = MonthConverterService::instance()->getName($month["month"]);
+
+            $entries = $this->getEntriesInMonth($userId, $month["year"], $month["month"]);
+            $months[$index]["hours"] = $entries["hours"];
+            $months[$index]["minutes"] = $entries["minutes"];
+            $months[$index]["flag"] = $entries["flag"];
         }
 
         echo $this->renderTwig("overview/total.twig",[
@@ -52,9 +57,25 @@ class OverviewController extends BaseController {
         $totalSeconds = 0;
         if (isset($entries)) {
             foreach ($entries as $entry) {
-                $totalSeconds += $entry->getWorktimeDifference()[2];
+                $difference = $entry->getWorktimeDifference();
+
+                // check if the flag of the difference is a "-" and therefore add or subtract the seconds
+                if ($difference["flag"] === "-") {
+                    $totalSeconds -= $difference[2];
+                } else {
+                    $totalSeconds += $difference[2];
+                }
             } 
         }
+
+        // check if the total seconds are negative
+        if ($totalSeconds < 0) {
+            // if so, set the flag to "-"
+            $flag = "-";
+        }
+
+        // we now have a flag wether the total seonds are negative or positive, to we can use the abs() value
+        $totalSeconds = abs($totalSeconds);
 
         // convert seconds to hours and minutes
         $minutes = ($totalSeconds / (60)) % 60;
@@ -74,7 +95,8 @@ class OverviewController extends BaseController {
         return [
             "hours" => $hours,
             "minutes" => $minutes,
-            "entries" => $entries
+            "entries" => $entries,
+            "flag" => $flag
         ];
     }
 

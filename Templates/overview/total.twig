@@ -12,7 +12,7 @@
         <div class="col-lg-6 col-sm-8 col-md-8 offset-lg-3 offset-sm-2 offset-md-2">
             <ul class="list-group">
                 {% for month in months %}
-                    <a href="{{ base }}/overview/{{ month.year }}/{{ month.month }}" class="list-group-item">{{ month.name }} {{ month.year }}</a>
+                    <a href="{{ base }}/overview/{{ month.year }}/{{ month.month }}" class="list-group-item text-dark text-decoration-none {% if month.flag == '-' %}bg-danger{% else %}bg-success{% endif %}">{{ month.name }} {{ month.year }} ({{ month.flag }}{{ month.hours }}:{{ month.minutes }})</a>
                 {% endfor %}
             </ul>
         </div>
