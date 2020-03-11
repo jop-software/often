@@ -16,7 +16,7 @@ class OverviewController extends BaseController {
         // if $months = null => there are no entries
         if (!$months) {
             // reroute to dashboard
-            // TODO: show info to user
+            $this->message("Du hast noch keine Einträge, daher können wir leider keine Übersicht generieren.", "info");
             $this->f3->reroute("/dashboard");
         }
 

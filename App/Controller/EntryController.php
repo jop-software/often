@@ -101,7 +101,7 @@ class EntryController extends BaseController {
             (new EntryModel())->deleteById($id);
         } else {
             // otherwies, reroute to dashboard
-            // TODO: show error message to the user
+            $this->message("Dieser Eintrag gehört dir nicht, also darfst du ihn auch nicht löschen.", "info");
             $this->f3->reroute("/dashboard");
         }
 
