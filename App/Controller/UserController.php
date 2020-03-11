@@ -9,7 +9,7 @@ class UserController extends BaseController {
      */
     public function authAction()
     {
-        echo $this->renderTwig("auth/auth.twig");
+        echo $this->render("auth/auth.twig");
     }
 
     /**

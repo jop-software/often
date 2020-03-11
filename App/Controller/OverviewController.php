@@ -30,7 +30,7 @@ class OverviewController extends BaseController {
             $months[$index]["flag"] = $entries["flag"];
         }
 
-        echo $this->renderTwig("overview/total.twig",[
+        echo $this->render("overview/total.twig",[
             "months" => $months
         ]);
     }
@@ -44,7 +44,7 @@ class OverviewController extends BaseController {
         $monthName = MonthConverterService::instance()->getName($month);
         $entries = $this->getEntriesInMonth($userId, $year, $month);
 
-        echo $this->renderTwig("overview/month.twig", [
+        echo $this->render("overview/month.twig", [
             "year" => $year,
             "month" => $month,
             "monthname" => $monthName,

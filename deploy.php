@@ -44,17 +44,11 @@ task('deploy', [
     'cleanup',
     'success',
     "copy_config",
-    "init_folders",
     "migrate_database"
 ]);
 
 task("copy_config", function() {
     run("cp ~/config/often.config.ini /var/www/vhosts/often/current/config.ini");
-});
-
-task("init_folders", function() {
-    run("mkdir /var/www/vhosts/often/current/tmp");
-    run("chmod -R 777 /var/www/vhosts/often/current/tmp");
 });
 
 task("migrate_database", function() {

@@ -61,7 +61,7 @@ class DashboardController extends BaseController
             $user->tryConstruct();
         }
 
-        echo $this->renderTwig("dashboard.twig", [
+        echo $this->render("dashboard.twig", [
             "user" => $user,
             "entries" => $entries,
             "totalSeconds" => $totalSeconds,
