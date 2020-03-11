@@ -49,7 +49,7 @@ class EntryController extends BaseController {
         $this->checkUser($this->f3->get("SESSION.userid"), $id);
 
         $entry = (new EntryModel())->loadById($id);
-        
+
         echo $this->renderTwig("edit_entry.twig", [
             "entry" => $entry
         ]);
@@ -130,6 +130,12 @@ class EntryController extends BaseController {
         $entry = new Entry();
         $entryModel = new EntryModel();
         $entry = $entryModel->loadById($entryid);
+
+        // check if the entry does exist
+        if (!$entry) {
+            // reroute the user to the create entry route when there is no entry with the given ID
+            $this->f3->reroute("/entry/create");
+        }
 
         // are the userid and the userid from the entry the same?
         if ($entry->getUserId() != $userid) {
