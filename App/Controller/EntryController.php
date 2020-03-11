@@ -49,11 +49,7 @@ class EntryController extends BaseController {
         $this->checkUser($this->f3->get("SESSION.userid"), $id);
 
         $entry = (new EntryModel())->loadById($id);
-
-        // echo $this->render("entry/edit.html.php", [
-        //     "entry" => $entry,
-        // ]);
-
+        
         echo $this->renderTwig("edit_entry.twig", [
             "entry" => $entry
         ]);
