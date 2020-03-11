@@ -1,0 +1,70 @@
+{% extends "index.twig" %}
+
+{% block content %}
+    <div class="row">
+        <div class="col-lg-12">
+            <h1 class="text-center">Eintrag #{{ entry.getId() }}, vom {{ entry.getDate()|date("Y.m.d") }} Bearbeiten</h1>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-lg-6 col-sm-6 col-md-6 offset-lg-3 offset-sm-3 offset-md-3">
+            <form action="{{ base }}/editEntry" method="post">
+                <input type="hidden" name="id" value="{{ entry.getId() }}">
+                <div class="container-fluid">
+                    <div class="row">
+                        <div class="col-lg-6">
+                            <div class="form-group">
+                                <label for="date">Datum</label>
+                                <input type="date" name="date" id="date" class="form-control" value="{{ entry.getDate() }}" >
+                            </div>
+                        </div>
+                        <div class="col-lg-6">
+                            <div class="form-group">
+                                <label for="exp">Erwartung</label>
+                                <input type="time" name="exp" id="exp" class="form-control" value="{{ entry.getExp() }}" >
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-lg-6">
+                            <div class="form-group">
+                                <label for="start">Start</label>
+                                <input type="time" name="start" id="start" class="form-control" value="{{ entry.getStart() }}" >
+                            </div>
+                        </div>
+                        <div class="col-lg-6">
+                            <div class="form-group">
+                                <label for="end">Ende</label>
+                                <input type="time" name="end" id="end" class="form-control" value="{{ entry.getEnd() }}" >
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-lg-6">
+                            <div class="form-group">
+                                <label for="pause">Pause</label>
+                                <input type="time" name="pause" id="pause" class="form-control" value="{{ entry.getBreak() }}" >
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-lg-12">
+                            <div class="form-group">
+                                <label for="note">Notizen</label>
+                                <textarea name="note" id="note" class="form-control" >{{ entry.getNote() }}</textarea>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-lg-12">
+                            <div class="btn-group w-100">
+                                <a href="{{ base }}/entry/{{ entry.getId() }}" class="btn btn-primary">Zurück</a>
+                                <input type="submit" value="Speichern" class="btn btn-primary">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+{% endblock %}

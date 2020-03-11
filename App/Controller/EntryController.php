@@ -50,8 +50,12 @@ class EntryController extends BaseController {
 
         $entry = (new EntryModel())->loadById($id);
 
-        echo $this->render("entry/edit.html.php", [
-            "entry" => $entry,
+        // echo $this->render("entry/edit.html.php", [
+        //     "entry" => $entry,
+        // ]);
+
+        echo $this->renderTwig("edit_entry.twig", [
+            "entry" => $entry
         ]);
     }
 
