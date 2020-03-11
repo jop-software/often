@@ -2,6 +2,7 @@
 
 namespace App\Controller;
 
+use App\Core\SessionWrapper;
 use App\Entity\User;
 use App\Models\EntryModel;
 use App\Models\UserModel;
@@ -44,22 +45,30 @@ class BaseController extends Prefab
      * call if you got an error
      * -> errors will get to the view
      */
-    public function error(string $msg) {
-        $errors = $this->f3->get("SESSION.errors");
-        if (!$errors) $errors = [];
-        array_push($errors, $msg);
-        $this->f3->set("SESSION.errors", $errors);
+    public function error(string $msg) 
+    {
+        // an error is an message type = danger
+        $this->message($msg, "danger");
     }
 
     /**
-     * clear the error array
+     * Add a new message to the session
+     * 
+     * @param string $message
+     * @param string $type
+     * @return void
      */
-    public function clearErrors() {
-        $this->f3->set("SESSION.errors", []);
+    public function message(string $message, string $type) : void 
+    {
+        // add the message to the session using the sessionWrapper class
+        SessionWrapper::addMessage($message, $type);
     }
+
 
     /**
      * return true if there are any errors
+     * 
+     * @deprecated
      */
     public function hasErrors() {
         return (bool)count($this->f3->get("SESSION.errors")) > 0;
