@@ -12,7 +12,13 @@ class OverviewController extends BaseController {
         $userId = $this->f3->get("SESSION.userid");
         $model = new EntryModel();
         $months = $model->loadMonthsFromUser($userId);
-        echo $this->render("overview/index.html.php",[
+
+        // inject the month names into the $months array
+        foreach ($months as $index => $month) {
+            $months[$index]["name"] = MonthConverterService::instance()->getName($month["month"]);
+        }
+
+        echo $this->renderTwig("overview/total.twig",[
             "months" => $months
         ]);
     }

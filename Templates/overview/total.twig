@@ -1,0 +1,20 @@
+{% extends "index.twig" %}
+
+{# TODO: show the monthly overtime in the total overview like in the dashboard #}
+
+{% block content %}
+    <div class="row">
+        <div class="col-lg-12">
+            <h1 class="text-center">Übersicht</h1>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-lg-6 col-sm-8 col-md-8 offset-lg-3 offset-sm-2 offset-md-2">
+            <ul class="list-group">
+                {% for month in months %}
+                    <a href="{{ base }}/overview/{{ month.year }}/{{ month.month }}" class="list-group-item">{{ month.name }} {{ month.year }}</a>
+                {% endfor %}
+            </ul>
+        </div>
+    </div>
+{% endblock %}
