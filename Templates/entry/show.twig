@@ -66,11 +66,14 @@
                         <div class="btn-group w-100">
                             <a href="{{ base }}/dashboard" class="btn btn-primary">Zurück</a>
                             <a href="{{ base }}/entry/{{ entry.getId() }}/edit" class="btn btn-primary">Bearbeiten</a>
-                            <a href="{{ base }}/entry/{{ entry.getId() }}/delete" class="btn btn-danger">Löschen</a>
+                            <a href="#delete" onclick="deleteEntry({{ entry.getId() }})" class="btn btn-danger">Löschen</a>
                         </div>
                     </div>
                 </div>
             </div>
         </div>
     </div>
+    <form action="{{ base }}/deleteEntry" id="delete_entry" method="post">
+        <input type="hidden" name="id" value="{{ entry.getId() }}">
+    </form>
 {% endblock %}
