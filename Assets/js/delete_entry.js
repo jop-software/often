@@ -4,10 +4,10 @@ function deleteEntry(id) {
         text: "Sicher, das du den Eintrag löschen möchtest?",
         icon: 'warning',
         showCancelButton: true,
-        confirmButtonColor: '#3085d6',
-        cancelButtonColor: '#d33',
-        confirmButtonText: 'Ja',
-        cancelButtonText: 'Nein'
+        confirmButtonColor: '#d33',
+        cancelButtonColor: '#3085d6',
+        confirmButtonText: 'Löschen',
+        cancelButtonText: 'Abbrechen'
     }).then((result) => {
         if (result.value) {
             let form = document.querySelector("#delete_entry");
