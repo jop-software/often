@@ -18,7 +18,13 @@ class SessionWrapper
     public static function addMessage(string $message, string $type) : void
     {
         // load all messages currently stored in the session or initialize an empty array
-        $sessionMessages = Base::instance()->get("SESSION.MESSAGES") || array();
+        $sessionMessages = Base::instance()->get("SESSION.MESSAGES");
+
+        // check if we got messages back from the session
+        if (!$sessionMessages) {
+            // if not, assign empty array
+            $sessionMessages = array();
+        }
 
         // create and append the message object
         $sessionMessages[] = [
