@@ -13,6 +13,13 @@ class OverviewController extends BaseController {
         $model = new EntryModel();
         $months = $model->loadMonthsFromUser($userId);
 
+        // if $months = null => there are no entries
+        if (!$months) {
+            // reroute to dashboard
+            // TODO: show info to user
+            $this->f3->reroute("/dashboard");
+        }
+
         // inject the month names into the $months array
         foreach ($months as $index => $month) {
             $months[$index]["name"] = MonthConverterService::instance()->getName($month["month"]);
