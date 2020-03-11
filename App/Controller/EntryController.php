@@ -11,7 +11,7 @@ class EntryController extends BaseController {
 
     public function createAction() {
         $this->f3->set("vars.date", date("Y-m-d"));
-        echo $this->renderTwig("new_entry.twig", []);
+        echo $this->renderTwig("entry/new.twig", []);
     }
 
     public function create(Base $f3, array $params) {
@@ -50,7 +50,7 @@ class EntryController extends BaseController {
 
         $entry = (new EntryModel())->loadById($id);
 
-        echo $this->renderTwig("edit_entry.twig", [
+        echo $this->renderTwig("entry/edit.twig", [
             "entry" => $entry
         ]);
     }
@@ -116,7 +116,7 @@ class EntryController extends BaseController {
 
         $entry = (new EntryModel())->loadById($id);
 
-        echo $this->renderTwig("show_entry.twig", [
+        echo $this->renderTwig("entry/show.twig", [
             "entry" => $entry
         ]);
     }
