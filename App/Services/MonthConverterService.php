@@ -15,7 +15,7 @@ class MonthConverterService extends Prefab
      */
     public function getName(int $monthNumber)
     {
-        // return the name of the month in the configures language
-        return Base::instance()->get("language.months")[$monthNumber];
+        // TODO: support for multiple languages
+        return date("F", mktime(0,0,0, $monthNumber, 10));
     }
 }
