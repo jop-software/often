@@ -44,7 +44,9 @@ task('deploy', [
     'cleanup',
     'success',
     "copy_config",
-    "init_folders"
+    "init_folders",
+    "install_dependencies",
+    "migrate_database"
 ]);
 
 task("copy_config", function() {
@@ -54,6 +56,14 @@ task("copy_config", function() {
 task("init_folders", function() {
     run("mkdir /var/www/vhosts/often/current/tmp");
     run("chmod -R 777 /var/www/vhosts/often/current/tmp");
+});
+
+task("install_dependencies", function() {
+    run("composer install");
+});
+
+task("migrate_database", function() {
+    run("./vendor/bin/doctrine-migrations migrate");
 });
 
 // [Optional] If deploy fails automatically unlock.
