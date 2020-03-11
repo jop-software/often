@@ -37,13 +37,23 @@ class OverviewController extends BaseController {
         $monthName = MonthConverterService::instance()->getName($month);
         $entries = $this->getEntriesInMonth($userId, $year, $month);
 
-        echo $this->render("overview/month.html.php", [
+        // echo $this->render("overview/month.html.php", [
+        //     "year" => $year,
+        //     "month" => $month,
+        //     "monthname" => $monthName,
+        //     "entries" => $entries["entries"],
+        //     "hours" => $entries["hours"],
+        //     "minutes" => $entries["minutes"]
+        // ]);
+
+        echo $this->renderTwig("overview/month.twig", [
             "year" => $year,
             "month" => $month,
             "monthname" => $monthName,
             "entries" => $entries["entries"],
             "hours" => $entries["hours"],
-            "minutes" => $entries["minutes"]
+            "minutes" => $entries["minutes"],
+            "flag" => $entries["flag"]
         ]);
         
     }

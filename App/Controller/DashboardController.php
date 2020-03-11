@@ -65,7 +65,8 @@ class DashboardController extends BaseController
             "user" => $user,
             "entries" => $entries,
             "totalSeconds" => $totalSeconds,
-            "totalTime" => "$flag$hours:$minutes"
+            "totalTime" => "$flag$hours:$minutes",
+            "flag" => $flag
         ]);
     }
 
