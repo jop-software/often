@@ -65,8 +65,17 @@ class SessionWrapper
 
     }
 
+    /**
+     * check if the current session has exired yet.
+     * 
+     * @return bool
+     */
     public static function isExpired() : bool
     {
-        
+        // get now and the expire date from the session
+        $now = new DateTime();
+        $sessionExpire = Base::instance()->get("SESSION.expire_date");
+
+        return ($now < $sessionExpire);
     }
 }
