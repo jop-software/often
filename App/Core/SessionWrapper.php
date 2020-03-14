@@ -3,6 +3,7 @@
 namespace App\Core;
 
 use Base;
+use DateInterval;
 use DateTime;
 
 class SessionWrapper 
@@ -57,6 +58,8 @@ class SessionWrapper
 
     /**
      * return the expiration date from the current session
+     * 
+     * @return DateTime
      */
     private static function getExpireDate() : DateTime
     {
@@ -64,9 +67,16 @@ class SessionWrapper
         return Base::instance()->get("SESSION.expire_date");
     }
 
+    /**
+     * update the expiration date in the session to now + TTL, set in config.ini
+     * 
+     * @return void
+     */
     public static function updateExpireDate() : void
     {
-
+        $now = new DateTime();
+        $ttl = Base::instance()->get("security.session.ttl");
+        $now->add(new DateInterval("P{$ttl}M"));
     }
 
     /**
