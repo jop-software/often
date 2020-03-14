@@ -13,9 +13,14 @@ jobs:
     steps:
       - name: Checkout
         uses: actions/checkout@v1
+      - name: Install Dependencies
+        run: composer install
+      - name: Migrate Database
+        run: doctrine-migrations migrate
       - name: Deploy
-        uses: musps/action-deployer-php@master
-        with:
-          args: deploy prod
-        env: 
-          SSH_PRIVATE_KEY: ${{ secrets.PRIVATE_KEY }}
+        uses: easingthemes/ssh-deploy@v2.0.7
+        env:
+          SSH_PRIVATE_KEY: ${{ secrets.SSH_KEY }}
+          SOURCE: "/var/www/vhosts/often-test/"
+          REMOTE_HOST: ${{ secrets.REMOTE_HOST }}
+          REMOTE_USER: ${{ secrets.REMOTE_USER }}
