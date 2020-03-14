@@ -55,9 +55,13 @@ class SessionWrapper
         Base::instance()->set("SESSION.MESSAGES", null);
     }
 
-    public static function getExpireDate() : DateTime
+    /**
+     * return the expiration date from the current session
+     */
+    private static function getExpireDate() : DateTime
     {
-
+        // return the expiration date, casted to a date to DateTime for proper return type
+        return Base::instance()->get("SESSION.expire_date");
     }
 
     public static function updateExpireDate() : void
