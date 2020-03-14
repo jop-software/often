@@ -1,0 +1,21 @@
+name: Deploy
+on: 
+  push:
+    branches: 
+      - master
+  pull_request:
+    branches: 
+      - master
+jobs:
+  deploy:
+    name: Deploy the project
+    runs-on: [ubuntu-latest]
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v1
+      - name: Deploy
+        uses: musps/action-deployer-php@master
+        with:
+          args: deploy prod
+        env: 
+          SSH_PRIVATE_KEY: ${{ secrets.PRIVATE_KEY }}
