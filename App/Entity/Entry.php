@@ -4,7 +4,6 @@ namespace App\Entity;
 
 use DateInterval;
 use DateTime;
-use App\Entity\Time;
 
 class Entry {
 

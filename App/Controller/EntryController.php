@@ -4,7 +4,6 @@ namespace App\Controller;
 
 use App\Entity\Entry;
 use App\Models\EntryModel;
-use App\Models\UserModel;
 use Base;
 
 class EntryController extends BaseController {

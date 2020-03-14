@@ -4,12 +4,10 @@ namespace App\Controller;
 
 use App\Core\SessionWrapper;
 use App\Entity\User;
-use App\Models\EntryModel;
 use App\Models\UserModel;
 use Base;
 use Exception;
 use Prefab;
-use Template;
 use Twig\Environment;
 use Twig\Loader\FilesystemLoader;
 
