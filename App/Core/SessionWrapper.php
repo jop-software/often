@@ -3,6 +3,7 @@
 namespace App\Core;
 
 use Base;
+use DateTime;
 
 class SessionWrapper 
 {
@@ -54,4 +55,18 @@ class SessionWrapper
         Base::instance()->set("SESSION.MESSAGES", null);
     }
 
+    public static function getExpireDate() : DateTime
+    {
+
+    }
+
+    public static function updateExpireDate() : void
+    {
+
+    }
+
+    public static function isExpired() : bool
+    {
+        
+    }
 }
