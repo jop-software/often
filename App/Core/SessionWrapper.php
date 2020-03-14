@@ -76,12 +76,13 @@ class SessionWrapper
     {
         $now = new DateTime();
         $ttl = Base::instance()->get("security.session.ttl");
-
+        $ttl = new DateInterval("PT{$ttl}M");
+        
         // add the configured amout of minute to $now
-        $now->add(new DateInterval("P{$ttl}M"));
+        $expire = $now->add($ttl);
 
         // write the expire date back into the session
-        Base::instance()->set("SESSION.expire_date", $now);
+        Base::instance()->set("SESSION.expire_date", $expire);
     }
 
     /**
@@ -95,7 +96,7 @@ class SessionWrapper
         $now = new DateTime();
         $sessionExpire = self::getExpireDate();
 
-        return ($now < $sessionExpire);
+        return ($now > $sessionExpire);
     }
 
     /**
