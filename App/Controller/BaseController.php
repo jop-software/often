@@ -4,12 +4,10 @@ namespace App\Controller;
 
 use App\Core\SessionWrapper;
 use App\Entity\User;
-use App\Models\EntryModel;
 use App\Models\UserModel;
 use Base;
 use Exception;
 use Prefab;
-use Template;
 use Twig\Environment;
 use Twig\Loader\FilesystemLoader;
 
@@ -111,9 +109,19 @@ class BaseController extends Prefab
      * check if the user is logged in before routing
      */
     public function beforeRoute() {
-        // check if the user is logged in
-        if (!$this->f3->get("SESSION.userid")) {
+        // check if there is a user id stored in the session
+        if (!SessionWrapper::getUserId()) {
+            // if there is no user id in the session, reroute to /auth
             $this->f3->reroute("/auth");
+        } else {
+            // check if the session is expired
+            if (SessionWrapper::isExpired()) {
+                // if so, reroute the user to /auth and set the user id in the session to null
+                SessionWrapper::setUserId(null);
+                $this->f3->reroute("/auth");
+            } else {
+                SessionWrapper::updateExpireDate();
+            }
         }
     }
 

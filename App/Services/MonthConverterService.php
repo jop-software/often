@@ -2,7 +2,6 @@
 
 namespace App\Services;
 
-use Base;
 use Prefab;
 
 class MonthConverterService extends Prefab
