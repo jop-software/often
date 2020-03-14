@@ -103,4 +103,13 @@ class SessionWrapper
     {
         return Base::instance()->get("SESSION.userid");
     }
+
+    /**
+     * set the user id to the given string 
+     * you also can pass null to log the user out
+     */
+    public static function setUserId(?string $userId) : void
+    {
+        Base::instance()->set("SESSION.userid", $userId);
+    }
 }
