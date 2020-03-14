@@ -2,6 +2,7 @@
 
 namespace App\Controller;
 
+use App\Core\SessionWrapper;
 use App\Entity\User;
 use App\Models\UserModel;
 
@@ -41,7 +42,11 @@ class AuthController extends BaseController
         $model = new UserModel();
         if ($model->checkCredentials($user)) {
             $user->tryConstruct();
+
+            // save user id in session and set the expiration date of the session
             $this->f3->set("SESSION.userid", $user->getId());
+            SessionWrapper::updateExpireDate();
+            
             $this->f3->reroute("/dashboard");
         } else {
             $this->error("Ungültige Anmeldedaten");

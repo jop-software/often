@@ -3,6 +3,8 @@
 namespace App\Core;
 
 use Base;
+use DateInterval;
+use DateTime;
 
 class SessionWrapper 
 {
@@ -54,4 +56,66 @@ class SessionWrapper
         Base::instance()->set("SESSION.MESSAGES", null);
     }
 
+    /**
+     * return the expiration date from the current session
+     * 
+     * @return DateTime
+     */
+    private static function getExpireDate() : ?DateTime
+    {
+        // return the expiration date, casted to a date to DateTime for proper return type
+        return Base::instance()->get("SESSION.expire_date");
+    }
+
+    /**
+     * update the expiration date in the session to now + TTL, set in config.ini
+     * 
+     * @return void
+     */
+    public static function updateExpireDate() : void
+    {
+        $now = new DateTime();
+        $ttl = Base::instance()->get("security.session.ttl");
+        $ttl = new DateInterval("PT{$ttl}M");
+        
+        // add the configured amout of minute to $now
+        $expire = $now->add($ttl);
+
+        // write the expire date back into the session
+        Base::instance()->set("SESSION.expire_date", $expire);
+    }
+
+    /**
+     * check if the current session has exired yet.
+     * 
+     * @return bool
+     */
+    public static function isExpired() : bool
+    {
+        // get now and the expire date from the session
+        $now = new DateTime();
+        $sessionExpire = self::getExpireDate();
+
+        return ($now > $sessionExpire);
+    }
+
+    /**
+     * Get the user id, stored in the current session.
+     * returns null if there is no user id
+     * 
+     * @return string 
+     */
+    public static function getUserId() : string
+    {
+        return Base::instance()->get("SESSION.userid");
+    }
+
+    /**
+     * set the user id to the given string 
+     * you also can pass null to log the user out
+     */
+    public static function setUserId(?string $userId) : void
+    {
+        Base::instance()->set("SESSION.userid", $userId);
+    }
 }
