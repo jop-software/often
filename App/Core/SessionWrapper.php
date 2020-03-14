@@ -78,7 +78,7 @@ class SessionWrapper
     {
         // get now and the expire date from the session
         $now = new DateTime();
-        $sessionExpire = Base::instance()->get("SESSION.expire_date");
+        $sessionExpire = self::getExpireDate();
 
         return ($now < $sessionExpire);
     }
