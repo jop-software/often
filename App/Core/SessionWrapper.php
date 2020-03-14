@@ -92,4 +92,15 @@ class SessionWrapper
 
         return ($now < $sessionExpire);
     }
+
+    /**
+     * Get the user id, stored in the current session.
+     * returns null if there is no user id
+     * 
+     * @return string 
+     */
+    public static function getUserId() : string
+    {
+        return Base::instance()->get("SESSION.userid");
+    }
 }
