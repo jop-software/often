@@ -61,7 +61,7 @@ class SessionWrapper
      * 
      * @return DateTime
      */
-    private static function getExpireDate() : DateTime
+    private static function getExpireDate() : ?DateTime
     {
         // return the expiration date, casted to a date to DateTime for proper return type
         return Base::instance()->get("SESSION.expire_date");
@@ -76,7 +76,12 @@ class SessionWrapper
     {
         $now = new DateTime();
         $ttl = Base::instance()->get("security.session.ttl");
+
+        // add the configured amout of minute to $now
         $now->add(new DateInterval("P{$ttl}M"));
+
+        // write the expire date back into the session
+        Base::instance()->set("SESSION.expire_date", $now);
     }
 
     /**
