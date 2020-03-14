@@ -105,7 +105,7 @@ class SessionWrapper
      * 
      * @return string 
      */
-    public static function getUserId() : string
+    public static function getUserId() : ?string
     {
         return Base::instance()->get("SESSION.userid");
     }
