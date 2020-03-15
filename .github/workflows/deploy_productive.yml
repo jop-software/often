@@ -1,0 +1,44 @@
+name: test ssh action
+on: 
+  push:
+    branches: master
+  pull_request:
+    branches: master
+jobs:
+  deploy:
+    name: Deploy
+    runs-on: [ubuntu-latest]
+    steps:
+       - name: pull changes from server
+         uses: appleboy/ssh-action@master
+         with:
+           host: ${{ secrets.HOST }}
+           username: ${{ secrets.USERNAME }}
+           password: ${{ secrets.PASSWORD }}
+           port: ${{ secrets.PORT }}
+           script: git -C /var/www/vhosts/often/ pull
+       - name: install dependencies
+         uses: appleboy/ssh-action@master
+         with:
+           host: ${{ secrets.HOST }}
+           username: ${{ secrets.USERNAME }}
+           password: ${{ secrets.PASSWORD }}
+           port: ${{ secrets.PORT }}
+           script: composer install -d /var/www/vhosts/often/
+       - name: migrate Database
+         uses: appleboy/ssh-action@master
+         with:
+           host: ${{ secrets.HOST }}
+           username: ${{ secrets.USERNAME }}
+           password: ${{ secrets.PASSWORD }}
+           port: ${{ secrets.PORT }}
+           script: /var/www/vhost/often/vendor/bin/doctrine-migrations migrate
+       - name: copy config file
+         uses: appleboy/ssh-action@master
+         with:
+           host: ${{ secrets.HOST }}
+           username: ${{ secrets.USERNAME }}
+           password: ${{ secrets.PASSWORD }}
+           port: ${{ secrets.PORT }}
+           script: cp ~/config/often.config.ini /var/www/vhosts/often/config.ini
+     
