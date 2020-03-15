@@ -57,4 +57,40 @@ class ProfileController extends BaseController {
         $this->f3->reroute("/profile");
     }
 
+    /**
+     * POST /user/password/reset
+     */
+    public function resetPassword()
+    {
+        $form = $this->f3->clean($this->f3->get("POST"));
+
+        // load the currently logged in user
+        $userModel = new UserModel();
+        $user = $userModel->getUserFromId(SessionWrapper::getUserId());
+
+        // construct the user
+        $user->tryConstruct();
+        $user->setPassword($form["old_password"]);
+
+        // check if the current password is valid for the user
+        if ($userModel->checkCredentials($user)) {
+            // check if the two new passwords are equal
+            if ($form["new_password"] === $form["retype_password"]) {
+                // set the new password
+                if ($user->setPassword($form["new_password"])) {
+                    $userModel->updateUser($user);
+                    $this->message("Password erfolgreich geändert", "success");
+                } else {
+                    $this->error("Das neue Passwort ist nicht gültig");
+                }
+            } else {
+                $this->error("Die neuen Passwörter sind nicht gleich");
+            }
+        } else {
+            $this->error("Falsches Password");
+        }
+
+        $this->f3->reroute("/profile");
+    }
+
 }
