@@ -2,6 +2,9 @@
 
 namespace App\Controller;
 
+use App\Core\SessionWrapper;
+use App\Models\UserModel;
+
 class ProfileController extends BaseController {
 
     /**
@@ -9,7 +12,14 @@ class ProfileController extends BaseController {
      */
     public function showAction()
     {
-        echo $this->render("profile/user.twig");
+        $userModel = new UserModel();
+        $user = $userModel->getUserFromId(
+            SessionWrapper::getUserId()
+        );
+
+        echo $this->render("profile/user.twig", [
+            "user" => $user
+        ]);
     }
 
 }
