@@ -57,10 +57,13 @@ class User {
 
     /**
      * Set the datetime of the user
+     * 
+     * @param string $created_at
      */
-    public function setCreatedAt(DateTime $created_at)
+    public function setCreatedAt(string $created_at)
     {
-        $this->created_at = $created_at;
+        // construct a new DateTime object and set it info $this->created_at
+        $this->created_at = new DateTime($created_at);
     }
 
     /**
