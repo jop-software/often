@@ -138,7 +138,8 @@ class UserModel extends BaseModel {
             ->update("user")
             ->set("username", "\"{$user->getUsername()}\"")
             ->set("password", "\"{$user->getPassword()}\"")
-            ->where("ID", $user->getId());
+            ->where("ID = ?")
+            ->setParameter("0", $user->getId());
 
         $query->execute();
     }
