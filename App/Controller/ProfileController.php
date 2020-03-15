@@ -9,7 +9,7 @@ class ProfileController extends BaseController {
      */
     public function showAction()
     {
-        echo $this->render("profile/profile.html.php");
+        echo $this->render("profile/user.twig");
     }
 
 }
