@@ -1,0 +1,108 @@
+{% extends "index.twig" %}
+
+{% block content %}
+<div class="row mt-3">
+    <div class="col-xl-8 offset-xl-2 col-md-12 col-md-0 col-lg-10 offset-lg-1">
+        <div class="container-fluid">
+            <div class="row">
+                <div class="col-3">
+                    <h1>{{ user.getUsername() }}</h1>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-xl-4">
+                    <div class="card">
+                        <div class="card-header text-center">
+                            <span>Statistiken</span>
+                        </div>
+                        <ul class="list-group list-group-flush">
+                            <li class="list-group-item">Registriert seit: {{ user.getCreatedAt() }}</li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="col-xl-8">
+                    <div class="container-fluid">
+                        <div class="row">
+                            <div class="col-12">
+                                {% include "components/messages.twig" %}
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-xl-6">
+                                <fieldset>
+                                    <legend>Profildaten</legend>
+                                    <form action="{{ base }}/user/update/data" method="post">
+                                        <div class="form-group">
+                                            <label for="username">Benutzername</label>
+                                            <input type="text" name="username" id="username" class="form-control" value="{{ user.getUsername() }}" autocomplete="off">
+                                        </div>
+                                        <div class="form-group">
+                                            <label for="email">E-Mail Adresse</label>
+                                            <input type="text" name="email" id="email" class="form-control" value="aktuell nicht verfügbar" autocomplete="off" disabled>
+                                        </div>
+                                        <div class="form-group">
+                                            <input type="submit" value="Speichern" class="form-control btn btn-success">
+                                        </div>
+                                    </form>
+                                </fieldset>
+                            </div>
+                            <div class="col-xl-6">
+                                <fieldset>
+                                    <legend>Einstellungen</legend>
+                                    <form action="{{ base }}/user/update/settings" method="post">
+                                        <div class="form-group">
+                                            <label for="language">Sprache</label>
+                                            <select name="language" id="language" class="form-control" disabled>
+                                                {% for language in languages %}
+                                                    <option value="{{ language.code }}">{{ language.name }}</option>
+                                                {% endfor %}
+                                            </select>
+                                        </div>
+                                        <div class="form-group">
+                                            <label for="date_format">Datumsformat</label>
+                                            <input type="text" name="date_format" id="date_format" value="aktuell nicht verfügbar" class="form-control" autocomplete="off" disabled>
+                                        </div>
+                                        <div class="form-group">
+                                            <input type="submit" value="Speichern" class="form-control btn btn-success">
+                                        </div>
+                                    </form>
+                                </fieldset>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-xl-12">
+                                <fieldset>
+                                    <legend>Passwort zurücksetzen</legend>
+                                    <form action="{{ base }}/user/password/reset" method="post">
+                                        <div class="row">
+                                            <div class="form-group col-xl-6">
+                                                <label for="old_password">Aktuelles Passwort</label>
+                                                <input type="password" name="old_password" id="old_password" class="form-control" required>
+                                            </div>
+                                        </div>
+                                        <div class="row">
+                                            <div class="form-group col-xl-6">
+                                                <label for="new_password">Neues Passwort</label>
+                                                <input type="password" name="new_password" id="new_password" class="form-control" required>
+                                            </div>
+                                            <div class="form-group col-xl-6">
+                                                <label for="retype_password">Neues Passwort Wiederholen</label>
+                                                <input type="password" name="retype_password" id="retype_password" class="form-control" required>
+                                            </div>
+                                        </div>
+                                        <div class="row">
+                                            <div class="form-group col-xl-6 col-xs-12">
+                                                <input type="submit" value="Aktualisieren" class="btn btn-success w-100">
+                                            </div>
+                                        </div>
+                                    </form>
+                                </fieldset>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

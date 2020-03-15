@@ -83,7 +83,7 @@ class UserModel extends BaseModel {
      */
     public function getUserFromUsername(string $username) {
         $queryBuilder = $this->getQueryBuilder()
-            ->select("id", "language")
+            ->select("id", "language", "created_at")
             ->from("user")
             ->where("username = ?")
             ->setParameter(0, $username);
@@ -96,6 +96,7 @@ class UserModel extends BaseModel {
             $user->setId($result[0]["id"]);
             $user->setLanguage($result[0]["language"]);
             $user->setUsername($username);
+            $user->setCreatedAt($result[0]["created_at"]);
 
             return $user;
         } else return false;
@@ -107,7 +108,7 @@ class UserModel extends BaseModel {
      */
     public function getUserFromId(int $id) {
         $queryBuilder = $this->getQueryBuilder()
-            ->select("username", "language")
+            ->select("username", "language", "created_at")
             ->from("user")
             ->where("id = ?")
             ->setParameter(0, $id);
@@ -120,9 +121,27 @@ class UserModel extends BaseModel {
             $user->setId($id);
             $user->setUsername($result[0]["username"]);
             $user->setLanguage($result[0]["language"]);
+            $user->setCreatedAt($result[0]["created_at"]);
 
             return $user;
         } else return false;
+    }
+
+    /**
+     * update the given user in the database
+     * 
+     * @param User $user
+     */
+    public function updateUser(User $user)
+    {
+        $query = $this->getQueryBuilder()
+            ->update("user")
+            ->set("username", "\"{$user->getUsername()}\"")
+            ->set("password", "\"{$user->getPassword()}\"")
+            ->where("ID = ?")
+            ->setParameter("0", $user->getId());
+
+        $query->execute();
     }
 
 }
