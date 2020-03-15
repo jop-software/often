@@ -32,7 +32,7 @@ jobs:
            username: ${{ secrets.USERNAME }}
            password: ${{ secrets.PASSWORD }}
            port: ${{ secrets.PORT }}
-           script: /var/www/vhost/often/vendor/bin/doctrine-migrations migrate
+           script: /var/www/vhosts/often/vendor/bin/doctrine-migrations migrate
        - name: copy config file
          uses: appleboy/ssh-action@master
          with:
