@@ -2,6 +2,7 @@
 
 namespace App\Entity;
 
+use DateTime;
 use App\Models\UserModel;
 
 class User {
@@ -10,6 +11,11 @@ class User {
     private $username;
     private $password;
     private $language;
+
+    /**
+     * @var DateTime
+     */
+    private $created_at;
 
     /**
      * set the id of the user
@@ -50,6 +56,14 @@ class User {
     }
 
     /**
+     * Set the datetime of the user
+     */
+    public function setCreatedAt(DateTime $created_at)
+    {
+        $this->created_at = $created_at;
+    }
+
+    /**
      * get the id from the user
      */
     public function getId() {
@@ -77,6 +91,17 @@ class User {
      */
     public function getLanguage() {
         return $this->language;
+    }
+
+    /**
+     * get the creation date from the database
+     *  
+     * @param string $format DateTime->format() string
+     * @return string 
+     */
+    public function getCreatedAt(string $format = "d.m.Y") : string
+    {
+        return $this->created_at->format($format);
     }
 
     /**
