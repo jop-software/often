@@ -1,4 +1,4 @@
-name: test ssh action
+name: Deploy to production server
 on: 
   push:
     branches: master
