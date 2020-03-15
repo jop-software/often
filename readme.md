@@ -1,6 +1,7 @@
 # often
-
 simple overtime tracking tool
+
+![Deploy to production server](https://github.com/cngJo/often/workflows/Deploy%20to%20production%20server/badge.svg?branch=master)
 
 # Installation
 1. clone repository
