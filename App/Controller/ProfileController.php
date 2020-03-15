@@ -48,4 +48,13 @@ class ProfileController extends BaseController {
         $this->f3->reroute("/profile");
     }
 
+    /**
+     * POST /user/update/settings
+     */
+    public function updateSettings()
+    {
+        // we dont have any settings implemted yet, so we just reroute back to the profile
+        $this->f3->reroute("/profile");
+    }
+
 }
