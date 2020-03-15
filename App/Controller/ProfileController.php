@@ -40,6 +40,7 @@ class ProfileController extends BaseController {
 
             // set the new username in the Entity and update in the database
             $user->setUsername($username);
+            $user->tryConstruct();
             $userModel->updateUser($user);
         } else {
             $this->error("Dieser Benutzername ist bereits vergeben");
