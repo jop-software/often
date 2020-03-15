@@ -130,6 +130,7 @@ class User {
             $this->username = $user->getUsername();
             $this->id = $user->getId();
             $this->language = $user->getLanguage();
+            $this->password = $user->getPassword();
             return true;
         } else return false;
     }
