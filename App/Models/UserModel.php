@@ -127,4 +127,19 @@ class UserModel extends BaseModel {
         } else return false;
     }
 
+    /**
+     * update the given user in the database
+     * 
+     * @param User $user
+     */
+    public function updateUser(User $user)
+    {
+        $query = $this->getQueryBuilder()
+            ->update("user")
+            ->set("username", "\"{$user->getUsername()}\"")
+            ->where("ID", $user->getId());
+
+        $query->execute();
+    }
+
 }
