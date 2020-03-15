@@ -26,7 +26,7 @@
                             <div class="col-xl-6">
                                 <fieldset>
                                     <legend>Profildaten</legend>
-                                    <form action="#" method="post">
+                                    <form action="/user/update/data" method="post">
                                         <div class="form-group">
                                             <label for="username">Benutzername</label>
                                             <input type="text" name="username" id="username" class="form-control" value="{{ user.getUsername() }}" autocomplete="off">
@@ -44,7 +44,7 @@
                             <div class="col-xl-6">
                                 <fieldset>
                                     <legend>Einstellungen</legend>
-                                    <form action="#" method="post">
+                                    <form action="/user/update/settings" method="post">
                                         <div class="form-group">
                                             <label for="language">Sprache</label>
                                             <select name="language" id="language" class="form-control">
@@ -68,7 +68,7 @@
                             <div class="col-xl-12">
                                 <fieldset>
                                     <legend>Passwort zurücksetzen</legend>
-                                    <form action="#" method="post">
+                                    <form action="/user/password/reset" method="post">
                                         <div class="row">
                                             <div class="form-group col-xl-6">
                                                 <label for="old_password">Aktuelles Passwort</label>
