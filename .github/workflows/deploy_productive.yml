@@ -40,5 +40,5 @@ jobs:
            username: ${{ secrets.USERNAME }}
            password: ${{ secrets.PASSWORD }}
            port: ${{ secrets.PORT }}
-           script: /var/www/vhosts/often/vendor/bin/doctrine-migrations migrate
+           script: cd /var/www/vhosts/often && /var/www/vhosts/often/vendor/bin/doctrine-migrations migrate -n
      
