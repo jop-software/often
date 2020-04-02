@@ -11,12 +11,22 @@
             </div>
             <div class="row">
                 <div class="col-xl-4">
-                    <div class="card">
+                    <div class="card mb-2">
                         <div class="card-header text-center">
                             <span>Statistiken</span>
                         </div>
                         <ul class="list-group list-group-flush">
                             <li class="list-group-item">Registriert seit: {{ user.getCreatedAt() }}</li>
+                        </ul>
+                    </div>
+                    <div class="card">
+                        <div class="card-header text-center">
+                            <span>Aktionen</span>
+                        </div>
+                        <ul class="list-group list-group-flush">
+                            <li class="list-group-item">
+                                <a href="#" class="btn btn-danger w-100">Alle Einträge Löschen</a>
+                            </li>
                         </ul>
                     </div>
                 </div>
