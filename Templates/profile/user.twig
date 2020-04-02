@@ -25,7 +25,10 @@
                         </div>
                         <ul class="list-group list-group-flush">
                             <li class="list-group-item">
-                                <a href="#" class="btn btn-danger w-100">Alle Einträge Löschen</a>
+                                <a href="#delete" onclick="deleteEntryAll()" class="btn btn-danger">Alle Einträge Löschen</a>
+                                <form action="{{ base }}/deleteEntry/all" id="delete_entry_all" method="post">
+                                    <input type="hidden" name="id" value="{{ entry.getId() }}">
+                                </form>
                             </li>
                         </ul>
                     </div>
