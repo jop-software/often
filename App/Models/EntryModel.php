@@ -193,6 +193,21 @@ class EntryModel extends BaseModel
     }
 
     /**
+     * Delete all entries for the user with the given ID
+     * 
+     * @param string $userId
+     */
+    public function deleteAllFromUser(string $userId)
+    {
+        $queryBuilder = $this->getQueryBuilder()
+            ->delete("entry")
+            ->where("userid = ?")
+            ->setParameter(0, $userId);
+        
+        $queryBuilder->execute();
+    }
+
+    /**
      * creates a App\Entity\Entry instance with the data from the given result
      * returns an array of instances if $result has two dimension
      * 

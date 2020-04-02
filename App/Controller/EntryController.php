@@ -4,6 +4,7 @@ namespace App\Controller;
 
 use App\Entity\Entry;
 use App\Models\EntryModel;
+use App\Models\UserModel;
 use Base;
 
 class EntryController extends BaseController {
@@ -105,6 +106,21 @@ class EntryController extends BaseController {
         }
 
         $this->f3->reroute("/dashboard");
+    }
+
+    /**
+     * API Route for deleting all entries
+     */
+    public function deleteAll() 
+    {
+        $user_id = $this->f3->get("SESSION.userid");
+
+        // delete all entries
+        (EntryModel::instance())->deleteAllFromUser($user_id);
+
+        // write success message to the user and reroute to the profile
+        $this->message("Alle Einträge erfolgreich gelöscht", "success");
+        $this->f3->reroute("/profile");
     }
 
     public function showAction(Base $f3, array $params) {
