@@ -88,6 +88,7 @@ class BaseController extends Prefab
 
         $params["base"] = $this->f3->get("BASE");
         $params["messages"] = SessionWrapper::getMessages();
+        $params["customization"] = $this->f3->get("customization");
 
         if ($userId = $this->f3->get("SESSION.userid")) {
             $params["loggedin_user"] = $userModel->getUserFromId($this->f3->get("SESSION.userid"));
