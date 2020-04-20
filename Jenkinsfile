@@ -11,6 +11,9 @@ pipeline {
       steps {
         sh '''git clone --bare git@git.jop-software.de:jop-web-dev/often mirror
 cd mirror
+git config user.name "Johannes Stephan Przymusinski"
+git config user.username "cngJo"
+git config user.email "johannes@przymusinski.de"
 git push --mirror git@github.com:cngJo/often.git'''
       }
     }
