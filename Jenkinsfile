@@ -9,7 +9,12 @@ pipeline {
 
     stage('Push to GitHub') {
       steps {
-        sh '''git clone --bare git@git.jop-software.de:jop-web-dev/often mirror
+        sh '''if [ -d mirror ]
+then
+    rm -rf mirror
+fi
+
+git clone --bare git@git.jop-software.de:jop-web-dev/often mirror
 cd mirror
 git config user.name "Johannes Stephan Przymusinski"
 git config user.username "cngJo"
