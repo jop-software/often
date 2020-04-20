@@ -9,7 +9,7 @@ pipeline {
 
     stage('Push to GitHub') {
       steps {
-        sh '''git clone --bare git@git.jop-software.de:jop-web-dev/often.git
+        sh '''git clone --bare git@git.jop-software.de:jop-web-dev/often
 cd often
 git push --mirror git@github.com:cngJo/often.git'''
       }
