@@ -1,7 +1,7 @@
 # often
 simple overtime tracking tool
 
-![Deploy to production server](https://github.com/cngJo/often/workflows/Deploy%20to%20production%20server/badge.svg?branch=master)
+<!-- TODO: Add Jenkins status badge for pipline -->
 
 # Installation
 1. clone repository
@@ -12,4 +12,4 @@ simple overtime tracking tool
 
 # Hosted
 You can use my hostet version on:
-[http://often.jocode.org](http://often.jocode.org)
+[http://often.jop-software.de](http://often.jop-software.de)
