@@ -1,7 +1,7 @@
 # often
 simple overtime tracking tool
 
-<!-- Add Jenkins status badge for pipline -->
+<!-- TODO: Add Jenkins status badge for pipline -->
 
 # Installation
 1. clone repository
