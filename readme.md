@@ -1,6 +1,8 @@
 # often
 simple overtime tracking tool
 
+<!-- Add Jenkins status badge for pipline -->
+
 # Installation
 1. clone repository
 2. copy config.example.ini into config.ini
