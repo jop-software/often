@@ -1,6 +1,8 @@
 # often
 simple overtime tracking tool
 
+![Build-Badge](https://jenkins.jop-software.de/job/Often/job/master/badge/icon)
+
 <!-- TODO: Add Jenkins status badge for pipline -->
 
 # Installation
